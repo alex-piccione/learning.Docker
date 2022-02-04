@@ -4,7 +4,8 @@
   "main": "app.ts",
   "scripts": {
     "start": "nodemon app.ts",
-    "test": "echo \"***Test not cionfigured yet***\" && exit 1"
+    "test": "echo \"***Test not cionfigured yet***\" && exit 1",
+    "build": "tsc --project ./"
   },
   "homepage": "https://github.com/alex-piccione/learning.docker#readme",
   "dependencies": {
