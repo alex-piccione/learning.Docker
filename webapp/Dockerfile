@@ -8,16 +8,16 @@ FROM node:current-alpine
 RUN mkdir -p /usr/src/app
 
 # Copy the app code (.) to the app directory
-#COPY . /usr/src/app
+COPY . /usr/src/app
 
 # Copy the builded app code (./build) to the app directory
-COPY ./build /usr/src/app
+#COPY ./build /usr/src/app
 
 # Set working directory context
-#WORKDIR /usr/src/app
+WORKDIR /usr/src/app
 
 # Install dependencies
-# RUN yarn install
+RUN yarn install && yarn build
 
 # Command for container to execute
-ENTRYPOINT [ "node", "app.js" ]
+ENTRYPOINT [ "node", "/usr/src/app/build/app.js" ]
