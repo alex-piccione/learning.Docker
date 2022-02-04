@@ -5,7 +5,7 @@ FROM node:current-alpine
 #LABEL bla bla 
 
 # Create directory in container image for app code
-RUN mkdir /usr/src/app
+RUN mkdir -p /usr/src/app
 
 # Copy the app code (.) to the app directory
 #COPY . /usr/src/app
