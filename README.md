@@ -16,6 +16,7 @@ _docker image build -t {user_id/repository}:{image}_ {Dockerfile path}
 
 ``
 docker image build -t alessandropiccione/test-webapp:3 .
+docker image build -t alessandropiccione/test-webapp:latest .
 ``
 
 ## Publish an image
@@ -32,7 +33,7 @@ docker image push alessandropiccione/test-webapp:latest
 
 ## Run a container
 ``docker container run``
-- -d = run in the background (daemon)
+- -d = run in the background (detached)
 - --name {name}
 - -p {local host}:{container host} port mapping
 
@@ -47,5 +48,5 @@ dockerhub is the default if we don't pass a URL registry.
 docker container ls -a
 
 ## Delete a container 
-``docker container stop {container_id}`` to stop it
-``docker container rm {container_id}``
+``docker container stop {container_id|container_name}`` to stop it
+``docker container rm {container_id|container_name}``
