@@ -14,7 +14,7 @@ RUN mkdir /usr/src/app
 COPY ./build /usr/src/app
 
 # Set working directory context
-WORKDIR /usr/src/app
+#WORKDIR /usr/src/app
 
 # Install dependencies
 # RUN yarn install
