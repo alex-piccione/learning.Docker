@@ -35,14 +35,10 @@ docker image build -t alessandropiccione/test-webapp:latest .
 
 ``
 docker image push alessandropiccione/test-webapp:3
-docker image push alessandropiccione/test-webapp:latest
+docker image push alessandropiccione/test-webapp:latest  
 ``
 
-1ccaf2dc393a0ae01ec89f50
-docker login -u alessandropiccione --password-stdin cloud.canister.io:5000
-echo 1ccaf2dc393a0ae01ec89f50 docker login -u alessandropiccione --password-stdin cloud.canister.io:5000
-docker   push cloud.canister.io:5000/alessandropiccione/test-webapp:4.3-alfa
-
+On canister an empty repository must be created before push.  
 
 ## Delete an image 
 ``docker image rm {image_name}``
