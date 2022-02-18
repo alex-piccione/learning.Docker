@@ -35,4 +35,3 @@ jobs:
           docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO/webapp:$VERSION 
           docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO/webapp:latest
           echo ---
-
