@@ -28,21 +28,21 @@ jobs:
           #docker image push ${{secrets.DOCKERHUB_USERID}}/$REPO:$VERSION
           #docker image push ${{secrets.DOCKERHUB_USERID}}/$REPO:latest
           echo ---
-
-          #echo Canister login and Push
-          #echo re-tag the images 
-          #docker image tag $REPO:$VERSION $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:$VERSION
-          #docker image tag $REPO:latest   $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:latest
-          #echo ${{secrets.CANISTER_PWD}} | docker login -u deploy+${{secrets.CANISTER_USERID}} $CANISTER_URL --password-stdin          
+          
+          echo Canister login and Push
+          echo re-tag the images 
+          docker image tag $REPO:$VERSION $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:$VERSION
+          docker image tag $REPO:latest   $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:latest
+          echo ${{secrets.CANISTER_PWD}}| docker login -u deploy+${{secrets.CANISTER_USERID}} $CANISTER_URL --password-stdin          
           #docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:$VERSION 
           #docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:latest
           echo ---
+          
           echo Container Registry Login and Push
           echo re-tag the images 
           docker image tag $REPO:$VERSION $CR_URL/${{secrets.CR_USERID}}/$REPO:$VERSION
           docker image tag $REPO:latest   $CR_URL/${{secrets.CR_USERID}}/$REPO:latest
           echo ${{secrets.CR_PWD}}| docker login -u ${{secrets.CR_USERID}} $CR_URL --password-stdin          
-          #docker login -u ${{secrets.CR_USERID}} -p ${{secrets.CR_PWD}} $CR_URL  
           docker image push $CR_URL/${{secrets.CR_USERID}}/$REPO:$VERSION 
           docker image push $CR_URL/${{secrets.CR_USERID}}/$REPO:latest
           echo ---
