@@ -33,7 +33,7 @@ jobs:
           echo re-tag the images 
           docker image tag $REPO:$VERSION $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:$VERSION
           docker image tag $REPO:latest   $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:latest
-          echo ${{secrets.CANISTER_PWD}}| docker login -u deploy+${{secrets.CANISTER_USERID}} $CANISTER_URL --password-stdin          
+          echo ${{secrets.CANISTER_PWD}}| docker login -u ${{secrets.CANISTER_USERID}} $CANISTER_URL --password-stdin          
           #docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:$VERSION 
           #docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:latest
           echo ---
