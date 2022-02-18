@@ -13,6 +13,11 @@ jobs:
     
       - name: build
         run: |
-          ls
+          echo build the image using the Dockerfile in webapp folder
           cd webapp
           docker image build -t ${{secrets.DOCKERHUB_USERID}}/webapp:$VERSION .
+          docker image build -t ${{secrets.DOCKERHUB_USERID}}/webapp:latest .
+          echo .
+          echo push the image on dockerhub
+          docker image push ${{secrets.DOCKERHUB_USERID}}/webapp:$VERSION
+          docker image push ${{secrets.DOCKERHUB_USERID}}/webapp:latest
