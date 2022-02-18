@@ -10,6 +10,6 @@ jobs:
     steps:
       - name: build
         run: |
-          ls
+          echo ls
           cd webapp
           docker image build -t webapp:$VERSION .
