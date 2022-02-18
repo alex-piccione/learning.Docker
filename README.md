@@ -38,8 +38,6 @@ docker image push alessandropiccione/test-webapp:3
 docker image push alessandropiccione/test-webapp:latest  
 ``
 
-On canister an empty repository must be created before push.  
-
 ## Delete an image 
 ``docker image rm {image_name}``
 ``docker image rm {image_id}``
