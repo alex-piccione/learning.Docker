@@ -7,6 +7,16 @@ Personal study of Docker
 Pluralsight [Docker fundamentals for developer](https://app.pluralsight.com/paths/skill/docker-fundamentals-for-developers): [_____]
 
 
+## Learned & To Learn
+
+[X] Image list, build, delete, push
+[X] Container run
+[ ] Docker Compose
+[ ] Docker Swarm
+[ ] Docker Services
+[ ] Docker Stacks
+
+
 ## Build an image
 
 ``docker image build`` or ``docker build``
