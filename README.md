@@ -38,11 +38,6 @@ docker image push alessandropiccione/test-webapp:3
 docker image push alessandropiccione/test-webapp:latest
 ``
 
-1ccaf2dc393a0ae01ec89f50
-docker login -u alessandropiccione --password-stdin cloud.canister.io:5000
-echo 1ccaf2dc393a0ae01ec89f50 docker login -u alessandropiccione --password-stdin cloud.canister.io:5000
-docker   push cloud.canister.io:5000/alessandropiccione/test-webapp:4.3-alfa
-
 
 ## Delete an image 
 ``docker image rm {image_name}``
