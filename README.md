@@ -21,8 +21,8 @@ Pluralsight [Docker fundamentals for developer](https://app.pluralsight.com/path
 
 ``docker image build`` or ``docker build``
 
-_docker image build -t {name}:{tag}_ {Dockerfile path
-_docker image build -t {user_id/repository}:{image}_ {Dockerfile path}
+docker image build -t {name}:{tag} {Dockerfile path}
+docker image build -t {user_id/repository}:{image} {Dockerfile path}
 
 ``
 docker image build -t alessandropiccione/test-webapp:3 .
