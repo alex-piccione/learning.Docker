@@ -8,6 +8,9 @@ jobs:
   create_image:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+    
       - name: build
         run: |
           ls > echo
