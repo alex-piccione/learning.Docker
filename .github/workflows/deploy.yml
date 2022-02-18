@@ -3,6 +3,8 @@ on: push
 
 env:  
   VERSION: 1.0.${{github.run_number}}
+  CANISTER_URL: cloud.canister.io:5000
+  REPO: test-1
 
 jobs:
   create_image:
@@ -15,8 +17,8 @@ jobs:
         run: |
           echo build the image using the Dockerfile in webapp folder
           cd webapp
-          docker image build -t ${{secrets.DOCKERHUB_USERID}}/webapp:$VERSION .
-          docker image build -t ${{secrets.DOCKERHUB_USERID}}/webapp:latest .
+          docker image build -t webapp:$VERSION .
+          docker image build -t webapp:latest .
           echo ---
           echo TODO echo docker.pkg.github.com
           echo ---
@@ -27,10 +29,10 @@ jobs:
           echo ---
           echo Canister login and Push
           echo re-tag the images 
-          docker image tag ${{secrets.DOCKERHUB_USERID}}/webapp:$VERSION cloud.canister.io:5000/${{secrets.DOCKERHUB_USERID}}/webapp:$VERSION
-          docker image tag ${{secrets.DOCKERHUB_USERID}}/webapp:latest cloud.canister.io:5000/${{secrets.DOCKERHUB_USERID}}/webapp:latest
-          echo ${{secrets.CANISTER_PWD}} | docker login -u deploy+${{secrets.CANISTER_USERID}} cloud.canister.io:5000 --password-stdin          
-          docker image push cloud.canister.io:5000/${{secrets.CANISTER_USERID}}/webapp:$VERSION 
-          docker image push cloud.canister.io:5000/${{secrets.CANISTER_USERID}}/webapp:latest 
+          docker image tag webapp:$VERSION $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO/webapp:$VERSION
+          docker image tag webapp:latest   $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO/webapp:latest
+          echo ${{secrets.CANISTER_PWD}} | docker login -u deploy+${{secrets.CANISTER_USERID}} $CANISTER_URL --password-stdin          
+          docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO/webapp:$VERSION 
+          docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO/webapp:latest
           echo ---
 
