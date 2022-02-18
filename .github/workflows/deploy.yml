@@ -13,6 +13,6 @@ jobs:
     
       - name: build
         run: |
-          ls > echo
+          ls
           cd webapp
-          docker image build -t webapp:$VERSION .
+          docker image build -t $DOCKERHUB_USERID/webapp:$VERSION .
