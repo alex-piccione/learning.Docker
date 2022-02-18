@@ -22,8 +22,8 @@ jobs:
           echo ---
           echo Canister login and Push
           echo ${{secrets.CANISTER_PWD}} | docker login -u deploy+${{secrets.CANISTER_USERID}} cloud.canister.io:5000 --password-stdin
-          docker image push ${{secrets.DOCKERHUB_USERID}}/webapp:$VERSION cloud.canister.io:5000  
-          docker image push ${{secrets.DOCKERHUB_USERID}}/webapp:latest cloud.canister.io:5000  
+          docker image push ${{secrets.DOCKERHUB_USERID}}/webapp:$VERSION 
+          docker image push ${{secrets.DOCKERHUB_USERID}}/webapp:latest 
           echo ---
           echo Docker login and Push
           echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin
