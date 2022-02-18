@@ -27,10 +27,10 @@ jobs:
           echo ---
           echo Canister login and Push
           echo re-tag the images 
-          docker image tag ${{secrets.DOCKERHUB_USERID}}/webapp:$VERSION cloud.canister.io:5000/${{secrets.DOCKERHUB_USERID}}/webapp:$VERSION
-          docker image tag ${{secrets.DOCKERHUB_USERID}}/webapp:latest cloud.canister.io:5000/${{secrets.DOCKERHUB_USERID}}/webapp:latest
+          docker image tag ${{secrets.DOCKERHUB_USERID}}/webapp:$VERSION cloud.canister.io:5000/${{secrets.DOCKERHUB_USERID}}/test-1/webapp:$VERSION
+          docker image tag ${{secrets.DOCKERHUB_USERID}}/webapp:latest cloud.canister.io:5000/${{secrets.DOCKERHUB_USERID}}/test-1/webapp:latest
           echo ${{secrets.CANISTER_PWD}} | docker login -u deploy+${{secrets.CANISTER_USERID}} cloud.canister.io:5000 --password-stdin          
-          docker image push cloud.canister.io:5000/${{secrets.CANISTER_USERID}}/webapp:$VERSION 
-          docker image push cloud.canister.io:5000/${{secrets.CANISTER_USERID}}/webapp:latest 
+          docker image push cloud.canister.io:5000/${{secrets.CANISTER_USERID}}/test-1/webapp:$VERSION 
+          docker image push cloud.canister.io:5000/${{secrets.CANISTER_USERID}}/test-1/webapp:latest 
           echo ---
 
