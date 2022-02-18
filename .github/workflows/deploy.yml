@@ -18,8 +18,13 @@ jobs:
           docker image build -t ${{secrets.DOCKERHUB_USERID}}/webapp:$VERSION .
           docker image build -t ${{secrets.DOCKERHUB_USERID}}/webapp:latest .
           echo ---
+          echo TODO echo docker.pkg.github.com
+          echo ---
+          echo Canister login
+          echo ${{secrets.CANISTER_PWD}} | docker login -u deploy+${{secrets.CANISTER_USERID}} cloud.canister.io:5000          
+          echo ---
           echo Docker login
-          echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}}
+          echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin
           echo ---
           echo push the image on dockerhub
           docker image push ${{secrets.DOCKERHUB_USERID}}/webapp:$VERSION
