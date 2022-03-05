@@ -1,5 +1,5 @@
 # Linux x64 witin Node (and nothing else!)
-FROM node:current-alpine
+FROM node:current-alpine as BUILD
 
 # Add some metadata
 #LABEL bla bla 
@@ -17,11 +17,16 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 
 # Install dependencies
-RUN yarn install --production=true && yarn build
+RUN yarn install
+RUN yarn build
 #RUN yarn install --production=true \
 #    && yarn build
 
 RUN npm prune --production
+RUN npm ci --only=production
+
+FROM node:current-alpine as MAIN
+COPY --from=BUILD /usr/src/app /usr/src/app
 
 EXPOSE 8005
 

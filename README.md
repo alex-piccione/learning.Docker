@@ -9,22 +9,29 @@ Pluralsight [Docker fundamentals for developer](https://app.pluralsight.com/path
 
 ## Build an image
 
-``docker image build`` or ``docker build``
+``docker image build`` or ``docker build``  
+**By default the docker build command will look for a Dockerfile at the root of the build context. **  
+use _-f <dockerfile>_ to specify a different Dockerfile
 
 _docker image build -t {name}:{tag}_ {Dockerfile path
 _docker image build -t {user_id/repository}:{image}_ {Dockerfile path}
 
 ``
-docker image build -t alessandropiccione/test-webapp:3 .
+# from webapp folder
+docker image build -t alessandropiccione/test-webapp:3.1 .
 docker image build -t alessandropiccione/test-webapp:latest .
+# from root folder
+docker image build -t alessandropiccione/test-webapp:3.1 ./webapp
 ``
 
 ## Publish an image
 ``docker image push {image:tag}``
 
 ``
-docker image push alessandropiccione/test-webapp:3
+docker image push alessandropiccione/test-webapp:3.1
 docker image push alessandropiccione/test-webapp:latest
+
+docker image push portfolio-app:latest
 ``
 
 ## Delete an image 
@@ -43,6 +50,9 @@ docker container run -d --name test_web -p 8006:8005 alessandropiccione/test-web
 
 dockerhub is the default if we don't pass a URL registry. 
 
+### Pass variables to the container
+``--env``, ``--env-file``
+--env-file=<file> works well with _.env_ files
 
 ## List containers
 docker container ls -a
