@@ -1,10 +1,23 @@
 # learning.docker
-Personal study of Docker
+Personal study of Docker  
+[![Create Docker image](https://github.com/alex-piccione/learning.docker/actions/workflows/deploy.yml/badge.svg)](https://github.com/alex-piccione/learning.docker/actions/workflows/deploy.yml)
 
 
 ## Courses
 
 Pluralsight [Docker fundamentals for developer](https://app.pluralsight.com/paths/skill/docker-fundamentals-for-developers): [_____]
+
+
+## Learned & To Learn
+
+- [X] Image list, build, delete, push
+- [X] Container run
+- [X] Cleanup image and use small start images
+- [X] Multi-stage Docker build
+- [ ] Docker Compose
+- [ ] Docker Swarm
+- [ ] Docker Services
+- [ ] Docker Stacks
 
 
 ## Build an image
@@ -13,8 +26,8 @@ Pluralsight [Docker fundamentals for developer](https://app.pluralsight.com/path
 **By default the docker build command will look for a Dockerfile at the root of the build context. **  
 use _-f <dockerfile>_ to specify a different Dockerfile
 
-_docker image build -t {name}:{tag}_ {Dockerfile path
-_docker image build -t {user_id/repository}:{image}_ {Dockerfile path}
+docker image build -t {name}:{tag} {Dockerfile path}
+docker image build -t {user_id/repository}:{image} {Dockerfile path}
 
 ``
 # from webapp folder
