@@ -1,0 +1,19 @@
+version: "3.8"
+services: 
+  portfolio-web:
+    image: c8n.io/alessandropiccione/portfolio:latest
+    env_file: .env.local 
+    #entrypoint: 
+
+    ports:
+      - "8001:3000"
+    deploy:
+      replicas: 3
+      #restart_policy: Always
+      labels:
+        app: portfolio
+    networks:
+      - portfolio-net
+    
+networks:
+  portfolio-net:
