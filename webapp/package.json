@@ -2,6 +2,7 @@
   "name": "learning.docker",
   "version": "1.0.0",
   "main": "app.ts",
+  "license": "UNLICENSED",
   "scripts": {
     "start": "nodemon app.ts",
     "test": "echo \"***Test not cionfigured yet***\" && exit 1",
