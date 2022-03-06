@@ -1,7 +1,7 @@
 import express from "express"
 import CurrencyService from "./services/currencies.service"
 
-const port = 8005 //  process.env.PORT || 8080
+const port = process.env.PORT || 8080
 
 const app = express()
 

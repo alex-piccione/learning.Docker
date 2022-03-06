@@ -1,7 +1,5 @@
 .env*
-node_modules
+node_modules*
 Dockerfile*
 readme.md
-yarn.lock
-package.json
-re.config.json
+build

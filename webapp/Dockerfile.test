@@ -1,21 +1,45 @@
 # Linux x64 witin Node (and nothing else!)
+FROM node:current-alpine as DEPS
+
+COPY package.json yarn.lock ./
+
+# Install dependencies for production
+RUN yarn install --frozen-lockfile --production=true
+# --no-bin-links
+RUN mv ./node_modules/ ./node_modules_production/
+
+#RUN echo ---
+#RUN yarn install --frozen-lockfile
+
 FROM node:current-alpine as BUILDER
 
 # Create directory in container image for app code
 #RUN mkdir -p /app
 
-# Copy the app code (.) to the app directory
-COPY . /app
-COPY package.json yarn.lock /app
-
-# Copy the builded app code (./build) to the app directory
-#COPY ./build /app
-
-# Set working directory context
+# what os this doing?
+#RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Install dependencies
-RUN yarn install --frozen-lockfile
+# Copy the app code (.) to the app directory, node_modules should be ignored
+COPY . .
+
+# copy node_modules from dependencies stage
+#COPY --from=DEPS ./node_modules ./node_modules
 
 # build
 RUN yarn build
+
+#ENTRYPOINT [ "node", "/app/build/app.js" ]
+
+FROM node:current-alpine as RUNNER
+
+WORKDIR /app
+
+# Copy the builded app code (./build) to the app directory
+COPY --from=DEPS ./node_modules_production /app/node_modules
+COPY --from=BUILDER ./app/build/ ./
+
+#ENV NODE_ENV production
+#EXPOSE 8011
+
+ENTRYPOINT [ "node", "app.js" ]

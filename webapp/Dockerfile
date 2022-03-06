@@ -21,7 +21,7 @@ RUN yarn install --production=true && yarn build
 #RUN yarn install --production=true \
 #    && yarn build
 
-RUN npm prune --production
+#RUN npm prune --production
 
 EXPOSE 8005
 

@@ -18,7 +18,7 @@ jobs:
         run: |
           echo build the image using the Dockerfile in webapp folder
           cd webapp
-          docker image build -t $REPO:0 .
+          docker image build -t $REPO:0 . -f Dockerfile.3
           echo ---
           echo TODO echo docker.pkg.github.com
           echo ---
