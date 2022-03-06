@@ -6,6 +6,7 @@ FROM node:current-alpine as BUILDER
 
 # Copy the app code (.) to the app directory
 COPY . /app
+COPY package.json yarn.lock /app
 
 # Copy the builded app code (./build) to the app directory
 #COPY ./build /app
@@ -18,20 +19,3 @@ RUN yarn install --frozen-lockfile
 
 # build
 RUN yarn build
-
-RUN npm prune --production
-RUN npm ci --only=production
-
-FROM node:current-alpine as MAIN
-COPY --from=BUILD /usr/src/app /usr/src/app
-
-EXPOSE 8005
-
-USER nextjs
-
-EXPOSE 3000
-
-ENV PORT 3000
-
-# Command for container to execute
-ENTRYPOINT [ "node", "/usr/src/app/build/app.js" ]
