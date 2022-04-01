@@ -20,6 +20,8 @@ Create container and start them.
 
 ``docker-compose up <service>``
 ``docker-compose up --no-deps <service>`` = only that service
+Use ``-d`` to run in non-interactive mode.  
+Use ``logs`` to see the logs.  
 
 ## docker-compose down
 Stop and remove the containers.

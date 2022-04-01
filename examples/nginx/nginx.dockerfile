@@ -5,7 +5,7 @@ LABEL maintainer=Alex
 # Copy custonm nginx config
 COPY ./docker/config/nginx.conf /etc/nginx/nginx.conf
   
-# Copy ...
+# Copy static files that can be served directly
 COPY ./public /var/www/public
 
 # Copy self=signing cert: https://devcenter.heroku.com/articles/ssl-certificate-self 
