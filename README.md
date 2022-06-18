@@ -61,7 +61,13 @@ docker image push portfolio-app:latest
 docker container run -d --name test_web -p 8006:8005 alessandropiccione/test-webapp:3
 ``
 
-dockerhub is the default if we don't pass a URL registry. 
+dockerhub is the default if we don't pass a URL registry.  
+
+To run a bash console in a container:  
+``
+docker container run -it --name test_web alessandropiccione/test-webapp:3 /bin/bash
+``
+
 
 ### Pass variables to the container
 ``--env``, ``--env-file``
