@@ -11,6 +11,11 @@ No explanation to how do that!!
 ``docker service create --name test-web -p 8080:3000 --replicas 3 alessandropiccione/test-webapp:latest``
 
 # Docker Stack
-``docker stack deploy -c docker-compose.yml potfolio-web``
+``docker stack deploy -c docker-compose.yml portfolio-web`` portfolio-web is the stack name
 
-Ths create a service and deploy it.  
+Ths create a service and deploy it to the swarm.
+
+``docker stack ls``
+``docker stack rm portfolio-web``
+``docker stack ps portfolio-web``
+``docker stack services portfolio-web``

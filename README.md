@@ -1,4 +1,4 @@
-# learning.docker
+# Learning Docker
 Personal study of Docker  
 [![Create Docker image](https://github.com/alex-piccione/learning.docker/actions/workflows/deploy.yml/badge.svg)](https://github.com/alex-piccione/learning.docker/actions/workflows/deploy.yml)
 
