@@ -1,0 +1,16 @@
+# Multiple nodes
+version: "3.8"
+
+services: 
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: .docker/docker-nginx.dockerfile
+    links:
+      - node1: node1
+      
+
+
+
+

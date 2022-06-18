@@ -17,6 +17,7 @@ Pluralsight [Docker fundamentals for developer](https://app.pluralsight.com/path
 - [ ] Docker Compose
 - [X] Docker Swarm (service)
 - [ ] Docker Stacks
+- [X] Docker NEtwork
 
 
 ## Build an image

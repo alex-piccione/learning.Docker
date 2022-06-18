@@ -1,0 +1,14 @@
+version: "3"
+services:
+  node:
+    build:
+      context: .
+      dockerfile: node.dokerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - network_1
+
+networks:
+  network_1:
+    driver: bridge
