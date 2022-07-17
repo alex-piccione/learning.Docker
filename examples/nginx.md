@@ -15,16 +15,15 @@ Create and start a container wiuth Nginx image exposing port 80 to the world.
 ``docker container run -d --name test.nginx --publish 80:80 nginx``
 
 ``curl http://<IP>:80``
-curl http://192.168.1.8:80
 
-## 2.Configure nginx container to serve a statis HTML page
+## 2.Configure nginx container to serve a static HTML page
 
 ``mkdir -p /data/www``  -p creats intermediate directories
 ``echo "this is a test" > /data/www/index.html``
 ``docker container exec -it test.nginx bash``
 
 Nginx is driven by its configuration file: nginx.conf.  
-Documentation says it can be in onr of these places: 
+Documentation says it can be in onr of these places:
 
 - /usr/local/nginx/conf
 - /etc/nginx
