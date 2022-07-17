@@ -1,4 +1,8 @@
-# Linux x64 witin Node (and nothing else!)
+# Final image get dependencies optimized for production
+# but the build needs the dependencies for development
+
+
+# Linux x64 within Node (and nothing else!)
 FROM node:current-alpine as DEPS
 
 COPY package.json yarn.lock ./
