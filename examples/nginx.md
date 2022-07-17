@@ -2,7 +2,6 @@
 
 <http://nginx.org>
 
-
 Goal: setup a nginx container on a Linux server, passing command trought SSH, that can serve a simple service and expose it to public.
 Use bash shell, not PowerShell, to simulate operation executed from a GitHub Action.  
 Not really a matter because this setup has to be done once to prepare the environment.  
@@ -45,10 +44,7 @@ ok. Read it:
 ``cat /etc/nginx/nginx.conf``
 Saved it in /config/default-nginx.conf
 
-
-
-
-
 ## 2.Configure nginx container
 
 ``docker container exec -it test.nginx bash``
+
