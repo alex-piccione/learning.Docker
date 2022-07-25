@@ -1,7 +1,7 @@
 import express from "express"
 import config from "./config.js"
 
-const version = "1"
+const version = "2"
 const server = express()
 
 server.listen(3000, () => {
