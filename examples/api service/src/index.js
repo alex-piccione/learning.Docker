@@ -1,8 +1,8 @@
 import express from "express"
-import config from "../config.js"
+import config from "./config.js"
 import fs from "fs"
 
-const version = "2.1"
+const version = "2.2"
 const server = express()
 
 const readSecrets = () => {
@@ -17,14 +17,14 @@ const readSecrets = () => {
 
 const secrets = readSecrets()
 
-server.listen(3000, () => {
+server.listen(config.serverPort, () => {
     console.log(`Server running on port ${config.serverPort}`)   
 })
 
 server.get("/", (req, res) => {
     const body = `<html>
         <h1>Hello World <small>(version: ${version})</small></h1>
-        <p>A: ${secrets.A}</p>
+        <p>A: ${secrets && secrets.A}</p>
     </html>`;
     //res.send(body, { "Content-Type": "text/plain" }, 200)
     res.send(body)

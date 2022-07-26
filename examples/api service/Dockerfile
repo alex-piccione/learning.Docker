@@ -11,7 +11,7 @@ COPY --from=dependencies /app/node_modules ./node_modules
 COPY package.json ./package.json
 COPY src/ ./
 
-ENV PORT 3000
-EXPOSE 3000
+#ENV PORT 3005
+EXPOSE 3005
 
 CMD ["node", "./index.js"]

@@ -5,4 +5,4 @@ const config = {
     googleApiKey: process.env.GOOGLE_API_KEY,    
 }
 
-export default { ...config }
+export default config
