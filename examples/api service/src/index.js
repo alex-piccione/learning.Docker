@@ -1,13 +1,14 @@
 import express from "express"
 import config from "./config.js"
+import Repository from "./repository.js"
 import fs from "fs"
 
 const version = "2.2"
 const server = express()
 
-const readSecrets = () => {
+const readSecrets = (secretsFile) => {
     try {
-        const secretsData = fs.readFileSync("secrets.json", "UTF8")
+        const secretsData = fs.readFileSync(secretsFile, "UTF8")
         return JSON.parse(secretsData)
     }
     catch (err) {        
@@ -15,7 +16,8 @@ const readSecrets = () => {
     }
 }
 
-const secrets = readSecrets()
+const secrets = readSecrets(config.secretsFile)
+const repository = Repository(secrets.MongoDB.username, secrets.MongoDB.password)
 
 server.listen(config.serverPort, () => {
     console.log(`Server running on port ${config.serverPort}`)   
@@ -36,4 +38,11 @@ server.get("/api/info", (req, res) => {
         + ", suggested: ['Kaz Hawkins', 'Michael Kiwanuka']" 
         + "}"
         )
+})
+
+server.get("/api/currency", async (req, res) => {
+
+    const currencies = await repository.getCurencies()
+
+    return res.json(currencies)
 })
