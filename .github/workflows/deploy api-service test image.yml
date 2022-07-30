@@ -1,10 +1,10 @@
 name: Create API-service test Docker image
 on: push
 
-env:  
-  VERSION: 2.2.${{github.run_number}}
-  REPO: alessandropiccione
+env:    
+  REPO: ${{secrets.DOCKERHUB_USERID}}
   IMAGE: test-api-server
+  VERSION: 2.2.${{github.run_number}}
 
 jobs:
   create_image:
@@ -16,12 +16,20 @@ jobs:
       - name: build
         run: |
           echo build the image using the Dockerfile in examples/api-service folder
-          #docker image build -t $REPO:0 . -f Dockerfile.3
-          docker image build -t $REPO/$IMAGE:$VERSION --file "./examples/api service/Dockerfile" "./examples/api service"
+          docker image build -t $REPO/$IMAGE:$VERSION -f "./examples/api service/Dockerfile" "./examples/api service"
           echo ---
 
+          #echo TODO echo docker.pkg.github.com
+          #echo ---
+          #echo Docker login and Push
+          #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin
+          #docker image push ${{secrets.DOCKERHUB_USERID}}/$REPO:$VERSION
+          #docker image push ${{secrets.DOCKERHUB_USERID}}/$REPO:latest
+          #echo ---
+
           #echo DockerHub login and Push
-          #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.CANISTER_USERID}} $CANISTER_URL --password-stdin   
+          #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} $DOCKERHUB_URL --password-stdin   
+          echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin   
           #docker image tag $REPO:0 $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:$VERSION
           #docker image tag $REPO:0 $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:latest                 
           #docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:$VERSION 
