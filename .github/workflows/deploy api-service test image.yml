@@ -21,7 +21,7 @@ jobs:
           echo ---
       - name: publish
         run: |
-          echo DockerHub login and Push
+          echo DockerHub login and Push image $IMAGE:$VERSION
           #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} $DOCKERHUB_URL --password-stdin   
           echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin   
           docker image tag $IMAGE:0 $REPO/$IMAGE:$VERSION
