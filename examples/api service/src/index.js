@@ -12,14 +12,12 @@ const readSecrets = (secretsFile) => {
     return JSON.parse(secretsData)
   } catch (err) {
     console.log(`Failed to load secrets. ${err}`)
+    throw new Error(`Failed to load secrets. ${err}`)
   }
 }
 
 const secrets = readSecrets(config.secretsFile)
-const repository = Repository(
-  secrets.MongoDB.username,
-  secrets.MongoDB.password
-)
+const repository = Repository(secrets.MongoDB.username, secrets.MongoDB.password)
 
 server.listen(config.serverPort, () => {
   console.log(`Server running on port ${config.serverPort}`)
@@ -50,11 +48,7 @@ server.get("/", (req, res) => {
 
 server.get("/api/info", (req, res) => {
   res.json(
-    "{time: " +
-      new Date().getTime() +
-      ", status: 'OK'" +
-      ", suggested: ['Kaz Hawkins', 'Michael Kiwanuka']" +
-      "}"
+    "{time: " + new Date().getTime() + ", status: 'OK'" + ", suggested: ['Kaz Hawkins', 'Michael Kiwanuka']" + "}"
   )
 })
 
@@ -81,9 +75,7 @@ server.get("/currencies", (req, res) => {
 
   repository
     .getCurencies()
-    .then((data) =>
-      res.send(formatData(data), { "Content-Type": "text/html" }, 200)
-    )
+    .then((data) => res.send(formatData(data), { "Content-Type": "text/html" }, 200))
     .catch((error) => createErrorHtml(error), 500)
 })
 
