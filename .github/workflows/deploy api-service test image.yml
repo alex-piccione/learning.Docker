@@ -39,22 +39,26 @@ jobs:
           #echo ---
 
   publish_image:
+    needs: create_image
     name: Publish Docker image
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
     
-      - name: build
+    steps:
+      - name: publish
         run: |
-          echo build the image using the Dockerfile in examples/api-service folder
-          docker image build -t $REPO/$IMAGE:$VERSION -f "./examples/api service/Dockerfile" "./examples/api service"
-          echo ---
-
           #echo TODO echo docker.pkg.github.com
           #echo ---
           #echo Docker login and Push
           #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin
           #docker image push ${{secrets.DOCKERHUB_USERID}}/$REPO:$VERSION
           #docker image push ${{secrets.DOCKERHUB_USERID}}/$REPO:latest
+          #echo ---
+
+          #echo DockerHub login and Push
+          #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} $DOCKERHUB_URL --password-stdin   
+          echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin   
+          #docker image tag $REPO:0 $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:$VERSION
+          #docker image tag $REPO:0 $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:latest                 
+          #docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:$VERSION 
+          #docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:latest
           #echo ---
