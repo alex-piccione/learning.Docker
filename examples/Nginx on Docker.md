@@ -31,9 +31,9 @@ A Docker network is required to allow Nginx to communicate with the other contai
 `docker container rm test-api-2 -f`
 
 Run a simple server (and expose on port 81 for tests)  
-`docker run -d --name test-api-1 --net=test-network --ip=172.20.0.10 alessandropiccione/test-api-server:latest`  
-`docker run -d --name test-api-2 --net=test-network --ip=172.20.0.11 alessandropiccione/test-api-server:latest`  
-`docker run -d -p 82:3005 --name test-api-2 --net=test-network --ip=172.20.0.11 alessandropiccione/test-api-server:2.1`  
+`docker run -d --name test-api-1 --net=test-network --ip=172.20.0.10 alessandropiccione/test-api-service:latest`  
+`docker run -d --name test-api-2 --net=test-network --ip=172.20.0.11 alessandropiccione/test-api-service:latest`  
+`docker run -d -p 82:3005 --name test-api-2 --net=test-network --ip=172.20.0.11 alessandropiccione/test-api-service:2.1`  
 `-p 81:port` is not mandatory, but it is useful to test it locally.  
 `docker container list -a`
 

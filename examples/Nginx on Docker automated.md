@@ -13,12 +13,9 @@ On the server we have this structure:
 
 ## First setup
 
-SSH authentication within Public Key must be in place.
+### Setup a dedicated user
 
-```bash
-$user = "alex"
-$server_ip = "192.168.1.8"
-```
+SSH authentication within Public Key must be in place.
 
 ```PowerShell
 $server_ip = "192.168.1.8"
@@ -28,8 +25,12 @@ ssh $user@$server_ip
 
 Server should have a user and space to execute the operations.  
 Create a "devops" group: `sudo groupadd devops`
-Create a "devop" user: `sudo useradd -M -g devops -s /bin/bash devop && sudo passwd devop`
+Create a "devop" user: `sudo useradd -m -g devops -s /bin/bash devop && sudo passwd devop`
 Add user to "sudoers": `sudo usermod -aG sudo devop`
+Add user to "docker" group: `sudo usermod -aG docker devop`
+
+### Set Secrets file and scripts for the web app
+
 Create the _/devops_ directory: `sudo mkdir /devops && sudo chown devop /devops && sudo chgrp devops /devops`
 Create the other folders: (not sudo) `mkdir /devops/secrets && mkdir /devops/scripts`
 Check the owner: `ls /devops/ -la`
@@ -43,8 +44,6 @@ drwxr-xr-x  2 devop devops 4096 Jul 30 21:06 secrets
 
 Server should have this scripts and files:
 
-### Set Secrets file and scripts for the web app
-
 From _examples_ folder:
 
 ```PowerShell
@@ -55,13 +54,24 @@ scp "api service/.secrets/secrets.prod.json" $user@${server_ip}:/devops/secrets/
 scp "devops/deploy.api-service.sh" $user@${server_ip}:/devops/scripts/deploy.api-service.sh
 ```
 
+## Deploy
+
+Script to run when new version is deployed:
+
+```bash
+`docker container rm test-api-1 -f`
+`docker container rm test-api-2 -f`
+`docker run -d --name test-api-1 --net=test-network --ip=172.20.0.10 alessandropiccione/test-api-service:latest`
+`docker run -d --name test-api-2 --net=test-network --ip=172.20.0.11 alessandropiccione/test-api-service:latest`
+```
+
+## Other operation not required for now
+
 Add the volume to the container _run_ if it is not added by the Dockerfile:
 `-v /path/in/host:/path/in/container`  
 `-v /home/alex/secrets:/secrets`
 
-docker run -d --name test-api-1 --net=test-network --ip=172.20.0.10 -v /devops/secrets:/secrets alessandropiccione/test-api-server:latest
-
-## Deploy
+docker run -d --name test-api-1 --net=test-network --ip=172.20.0.10 -v /devops/secrets:/secrets alessandropiccione/test-api-service:latest
 
 Chaneg the path in _config.js_.
 In the deploy script do this:
