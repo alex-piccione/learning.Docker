@@ -1,5 +1,6 @@
 import express from "express"
 import config from "./config.js"
+import Logger from "./logger.js"
 import Repository from "./repository.js"
 import fs from "fs"
 
@@ -12,10 +13,12 @@ const readSecrets = (secretsFile) => {
     return JSON.parse(secretsData)
   } catch (err) {
     console.log(`Failed to load secrets. ${err}`)
+    logger.log(`Failed to load secrets. ${err}`)
     throw new Error(`Failed to load secrets. ${err}`)
   }
 }
 
+const logger = Logger(config.logFile)
 const secrets = readSecrets(config.secretsFile)
 const repository = Repository(secrets.MongoDB.username, secrets.MongoDB.password)
 

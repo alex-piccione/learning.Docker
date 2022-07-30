@@ -3,6 +3,14 @@
 Procedure, scripts and commands to execute Continuous Delivery using containers on a single Docker instance.  
 We try to deploy a web app with a Nginx that makes a load balancer for the 2 instances.
 
+On the server we have this structure:
+
+```
+~/devops
+   /secrets
+   /scripts
+```
+
 ## First setup
 
 SSH authentication within Public Key must be in place.
@@ -12,28 +20,54 @@ $user = "alex"
 $server_ip = "192.168.1.8"
 ```
 
-Server should have a user to execute the operations.  
-Create a "devops" user.
-
 ```PowerShell
 $server_ip = "192.168.1.8"
 $user = Read-Host "Enter username"
 ssh $user@$server_ip
 ```
 
-Server should have this scripts and files:
+Server should have a user and space to execute the operations.  
+Create a "devops" group: `sudo groupadd devops`
+Create a "devop" user: `sudo useradd -M -g devops -s /bin/bash devop && sudo passwd devop`
+Add user to "sudoers": `sudo usermod -aG sudo devop`
+Create the _/devops_ directory: `sudo mkdir /devops && sudo chown devop /devops && sudo chgrp devops /devops`
+Create the other folders: (not sudo) `mkdir /devops/secrets && mkdir /devops/scripts`
+Check the owner: `ls /devops/ -la`
 
-- Secrets file for the web app: _/root/secrets/wep-api.secrets.json_
-
-```PowerShell
-$server_ip=192.168.1.8
-$user=devops
-scp .secrets/secrets.prod.json alex@192.168.1.8:~/secrets/api-service.secrets.json
+```
+drwxr-xr-x  4 devop devops 4096 Jul 30 21:08 .
+drwxr-xr-x 23 root  root   4096 Jul 30 17:48 ..
+drwxr-xr-x  2 devop devops 4096 Jul 30 21:08 scripts
+drwxr-xr-x  2 devop devops 4096 Jul 30 21:06 secrets
 ```
 
-Add the volume to the container _run_:
-`-v /path/in/host:/path/in/container`  
-`-v /home/alex/secrets:/secrets`  
-docker run -d --name test-api-1 --net=test-network --ip=172.20.0.10 -v /home/alex/secrets:/secrets alessandropiccione/test-api-server:latest
+Server should have this scripts and files:
 
-## Automated
+### Set Secrets file and scripts for the web app
+
+From _examples_ folder:
+
+```PowerShell
+$server_ip="192.168.1.8"
+$user="alex"
+# curly brackets are used to escape the variable followed by colon (:)
+scp "api service/.secrets/secrets.prod.json" $user@${server_ip}:/devops/secrets/api-service.secrets.json
+scp "devops/deploy.api-service.sh" $user@${server_ip}:/devops/scripts/deploy.api-service.sh
+```
+
+Add the volume to the container _run_ if it is not added by the Dockerfile:
+`-v /path/in/host:/path/in/container`  
+`-v /home/alex/secrets:/secrets`
+
+docker run -d --name test-api-1 --net=test-network --ip=172.20.0.10 -v /devops/secrets:/secrets alessandropiccione/test-api-server:latest
+
+## Deploy
+
+Chaneg the path in _config.js_.
+In the deploy script do this:
+
+_deploy-api-service.sh_
+
+```bash
+sed -i "s/secretsFile:*/secretsFile: /secrets/api-service.secrets.json" src/config.json
+```
