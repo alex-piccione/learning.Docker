@@ -11,7 +11,8 @@ COPY --from=dependencies /app/node_modules ./node_modules
 COPY package.json ./package.json
 COPY src/ ./
 
-VOLUME /devops/secrets:/secrets
+#VOLUME /devops/secrets:/secrets
+VOLUME /secrets
 
 #ENV PORT 3005
 EXPOSE 3005

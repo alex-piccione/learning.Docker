@@ -14,11 +14,11 @@ Crete a Docker image from a Dockerfile
 `docker image build -t alessandropiccione/test-api-server:2.2 --file "./examples/api service/Dockerfile" "./examples/api service"`
 
 Test it:  
-`docker container run -d --name test-api-server -p 8010:3005 alessandropiccione/test-api-server:latest`
-To remove the container: `docker rm test-api-server -f`
+`docker container run -d --name test-api-service -p 8010:3005 alessandropiccione/test-api-service:latest`
+To remove the container: `docker rm test-api-service -f`
 
 Open <http:/localhost:8006> or <http:/localhost:8006/api/info> in a browser.
 
-Publish `docker image push alessandropiccione/test-api-server:2.2`  
-Create Latest `docker tag alessandropiccione/test-api-server:2.2 alessandropiccione/test-api-server:latest`
-Publish Latest `docker image push alessandropiccione/test-api-server:latest`
+Publish `docker image push alessandropiccione/test-api-service:2.2`  
+Create Latest `docker tag alessandropiccione/test-api-server:2.2 alessandropiccione/test-api-service:latest`
+Publish Latest `docker image push alessandropiccione/test-api-service:latest`
