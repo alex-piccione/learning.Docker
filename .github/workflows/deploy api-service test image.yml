@@ -1,0 +1,29 @@
+name: Create API-service test Docker image
+on: push
+
+env:  
+  VERSION: 2.2.${{github.run_number}}
+  REPO: alessandropiccione
+  IMAGE: test-api-server
+
+jobs:
+  create_image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+    
+      - name: build
+        run: |
+          echo build the image using the Dockerfile in examples/api-service folder
+          #docker image build -t $REPO:0 . -f Dockerfile.3
+          docker image build -t $REPO/$IMAGE:$VERSION --file "./examples/api service/Dockerfile" "./examples/api service"
+          echo ---
+
+          #echo DockerHub login and Push
+          #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.CANISTER_USERID}} $CANISTER_URL --password-stdin   
+          #docker image tag $REPO:0 $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:$VERSION
+          #docker image tag $REPO:0 $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:latest                 
+          #docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:$VERSION 
+          #docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:latest
+          #echo ---
