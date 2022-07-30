@@ -3,7 +3,7 @@ FROM node:18-alpine AS dependencies
 
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm install --production --frozen-lockfile
+RUN npm install --omit=dev --frozen-lockfile
 
 FROM node:18-alpine AS builder
 WORKDIR /app
