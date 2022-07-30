@@ -21,19 +21,11 @@ jobs:
           echo ---
       - name: publish
         run: |
-          #echo TODO echo docker.pkg.github.com
-          #echo ---
-          #echo Docker login and Push
-          #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin
-          #docker image push ${{secrets.DOCKERHUB_USERID}}/$REPO:$VERSION
-          #docker image push ${{secrets.DOCKERHUB_USERID}}/$REPO:latest
-          #echo ---
-
           echo DockerHub login and Push
           #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} $DOCKERHUB_URL --password-stdin   
           echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin   
           docker image tag $IMAGE:0 $REPO/$IMAGE:$VERSION
-          docker image tag $REPO:0 $REPO/$IMAGE:latest               
+          docker image tag $IMAGE:0 $REPO/$IMAGE:latest               
           docker image push $REPO/$IMAGE:$VERSION 
           docker image push $REPO/$IMAGE:latest
           echo ---
