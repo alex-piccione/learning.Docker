@@ -29,20 +29,3 @@ jobs:
           docker image push $REPO/$IMAGE:$VERSION 
           docker image push $REPO/$IMAGE:latest
           echo ---
-
-  publish_image:
-    needs: create_image
-    name: Publish Docker image
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: publish
-        run: |
-          echo DockerHub login and Push
-          #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} $DOCKERHUB_URL --password-stdin   
-          echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin   
-          docker image tag $IMAGE:0 $REPO/$IMAGE:$VERSION
-          docker image tag $REPO:0 $REPO/$IMAGE:latest               
-          docker image push $REPO/$IMAGE:$VERSION 
-          docker image push $REPO/$IMAGE:latest
-          echo ---

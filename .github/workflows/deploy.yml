@@ -1,46 +1,48 @@
 name: Create Docker image
 on: push
 
-env:  
+env:   
+  IMAGE: test-webapp
   VERSION: 1.0.${{github.run_number}}
   CANISTER_URL: cloud.canister.io:5000
   CR_URL: c8n.io
-  REPO: test-webapp
+
 
 jobs:
   create_image:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
     
       - name: build
         run: |
           echo build the image using the Dockerfile in webapp folder
           cd webapp
-          docker image build -t $REPO:0 -f devops/Dockerfile.3 .
+          docker image build -t $IMAGE:0 -f devops/Dockerfile.3 .
           echo ---
           
-          echo TODO echo docker.pkg.github.com
-          echo ---
+          #echo TODO echo docker.pkg.github.com
+          #echo ---
           #echo Docker login and Push
           #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin
           #docker image push ${{secrets.DOCKERHUB_USERID}}/$REPO:$VERSION
           #docker image push ${{secrets.DOCKERHUB_USERID}}/$REPO:latest
-          echo ---
+          #echo ---
           
           echo Canister login and Push
           echo ${{secrets.CANISTER_PWD}} | docker login -u ${{secrets.CANISTER_USERID}} $CANISTER_URL --password-stdin   
-          docker image tag $REPO:0 $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:$VERSION
-          docker image tag $REPO:0 $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:latest                 
-          docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:$VERSION 
-          docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$REPO:latest
+          docker image tag $IMAGE:0 $CANISTER_URL/${{secrets.CANISTER_USERID}}/$IMAGE:$VERSION
+          docker image tag $IMAGE:0 $CANISTER_URL/${{secrets.CANISTER_USERID}}/$IMAGE:latest                 
+          docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$IMAGE:$VERSION 
+          docker image push $CANISTER_URL/${{secrets.CANISTER_USERID}}/$IMAGE:latest
+          docker image pull $CANISTER_URL/${{secrets.CANISTER_USERID}}/$IMAGE:latest
           echo ---
           
           echo Container Registry Login and Push
           echo ${{secrets.CR_PWD}} | docker login -u ${{secrets.CR_USERID}} $CR_URL --password-stdin          
-          docker image tag $REPO:0 $CR_URL/${{secrets.CR_USERID}}/$REPO:$VERSION
-          docker image tag $REPO:0 $CR_URL/${{secrets.CR_USERID}}/$REPO:latest          
-          docker image push $CR_URL/${{secrets.CR_USERID}}/$REPO:$VERSION 
-          docker image push $CR_URL/${{secrets.CR_USERID}}/$REPO:latest
+          docker image tag $IMAGE:0 $CR_URL/${{secrets.CR_USERID}}/$IMAGE:$VERSION
+          docker image tag $IMAGE:0 $CR_URL/${{secrets.CR_USERID}}/$IMAGE:latest          
+          docker image push $CR_URL/${{secrets.CR_USERID}}/$IMAGE:$VERSION 
+          docker image push $CR_URL/${{secrets.CR_USERID}}/$IMAGE:latest
           echo ---
