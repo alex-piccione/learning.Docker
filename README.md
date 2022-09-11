@@ -17,6 +17,7 @@ Pluralsight [Docker fundamentals for developer](https://app.pluralsight.com/path
 - [X] Docker Swarm (service)
 - [ ] Docker Stacks
 - [X] Docker Network
+- [ ] Docker Volumes/Bind mounts
 
 ## Build an image
 
@@ -40,12 +41,12 @@ docker image build -t alessandropiccione/test-webapp:3.1 ./webapp
 
 ``docker image push {image:tag}``
 
-``
+```bash
 docker image push alessandropiccione/test-webapp:3.1
 docker image push alessandropiccione/test-webapp:latest
 
 docker image push portfolio-app:latest
-``
+```
 
 ## Delete an image
 
@@ -60,16 +61,12 @@ docker image push portfolio-app:latest
 - --name {name}
 - -p {local host}:{container host} port mapping
 
-``
-docker container run -d --name test_web -p 8006:8005 alessandropiccione/test-webapp:3
-``
+``docker container run -d --name test_web -p 8006:8005 alessandropiccione/test-webapp:3``
 
 dockerhub is the default if we don't pass a URL registry.  
 
 To run a bash console in a container:  
-``
-docker container run -it --name test_web alessandropiccione/test-webapp:3 /bin/bash
-``
+``docker container run -it --name test_web alessandropiccione/test-webapp:3 /bin/bash``
 
 ### Pass variables to the container
 
@@ -78,9 +75,9 @@ docker container run -it --name test_web alessandropiccione/test-webapp:3 /bin/b
 
 ## List containers
 
-docker container ls -a
+``docker container ls -a``
 
-## Delete a container =
+## Delete a container
 
 ``docker container stop {container_id|container_name}`` to stop it
 ``docker container rm {container_id|container_name}``

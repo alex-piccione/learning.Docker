@@ -4,7 +4,7 @@ The Pluralsigh course of Nigel Poulton just jump from a description to a screen 
 He says you can use local Docker app as fine as Docker Play.  
 
 Running ``swarm init`` will set my current machine as a manager.  
-But I don't have othe rmachines to set as managers and workers.  
+I don't have other machines to set as managers or workers.  
 No explanation to how do that!!
 
 
