@@ -1,5 +1,9 @@
-FROM node:16-alpine AS deps
+# Builder image, build the executable
+FROM node:16-alpine 
+
 WORKDIR /app
+COPY . . 
+RUN yarn install
 
-
-ENTRYPOINT [ "executable" ]
+# CMD ["node", "app.js"]
+ENTRYPOINT ["node", "app.js"]
