@@ -1,23 +1,23 @@
-import { createServer } from "http";
+import { createServer } from "http"
 //import { connect } from "mongoose"
-import mongoose from "mongoose";
-const { connect } = mongoose;
-import CurrencyModel from "./models.js";
+import mongoose from "mongoose"
+const { connect } = mongoose
+import CurrencyModel from "./models.js"
 
-const version = "1.1";
+const version = "1.1"
 
 connect("mongodb://mongo:27017/db", {
   useNewUrlParser: true,
   //useFindAndModify: false,
   useUnifiedTopology: true,
-}).catch((error) => console.error(`Failed to connect to MongoDB: ${error}`));
+}).catch(error => console.error(`Failed to connect to MongoDB: ${error}`))
 
 createServer((req, res) => {
   //const model = new CurrencyModel({ code: "aaa", name: "aaaaa" });
   //model.save();
 
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end(`app is running, Version: ${version}`);
-}).listen(3000);
+  if (req.url) res.writeHead(200, { "Content-Type": "text/plain" })
+  res.end(`App is running, Version: ${version}`)
+}).listen(3000)
 
-console.log("Server running on port 3000");
+console.log("Server running on port 3000")
