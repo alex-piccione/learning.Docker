@@ -10,6 +10,7 @@ echo
 echo "### docker run ###"
 echo
 docker container rm test-server -f
+# production: --restart=unless-stopped
 docker run -d -p 3001:3000 --name test-server test-web-app:latest  
 echo
 echo  
@@ -27,4 +28,4 @@ function pause(){
 }
 
 ## Pause it ##
-pause
+#pause
