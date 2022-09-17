@@ -6,6 +6,7 @@ env:
   VERSION: 1.0.${{github.run_number}}
   CANISTER_URL: cloud.canister.io:5000
   CR_URL: c8n.io
+  SRC_PATH: examples/node webapp 1
 
 
 jobs:
@@ -19,7 +20,7 @@ jobs:
         run: |
           echo build the image using the Dockerfile in webapp folder
           cd webapp
-          docker image build -t $IMAGE:0 -f devops/Dockerfile.3 .
+          docker image build -t $IMAGE:0 -f "$SRC_PATH/devops/Dockerfile.3" .
           echo ---
           
           #echo TODO echo docker.pkg.github.com
