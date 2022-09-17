@@ -20,7 +20,7 @@ jobs:
           echo "### Build the image using the Dockerfile"
           cd "$SRC_PATH"
           #docker image build -t $IMAGE:0 -f "api service/Dockerfile" "api service"
-          docker image build -t $IMAGE:0 .
+          docker image build -t $IMAGE .
           echo ---
       - name: publish on DockerHub
         env:
@@ -29,8 +29,8 @@ jobs:
           echo "### DockerHub login and Push image \"$IMAGE:$VERSION\" "
           #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} $DOCKERHUB_URL --password-stdin   
           echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin           
-          docker image tag $IMAGE:0 $REPO/$IMAGE:$VERSION
-          docker image tag $IMAGE:0 $REPO/$IMAGE:latest
+          docker image tag $IMAGE $REPO/$IMAGE:$VERSION
+          docker image tag $IMAGE $REPO/$IMAGE:latest
           docker image push $REPO/$IMAGE:$VERSION 
           docker image push $REPO/$IMAGE:latest
           echo ---
@@ -45,15 +45,9 @@ jobs:
           # login using environment variables: 
           password=$(aws ecr get-login-password)
           echo $password | docker login -u AWS $REPO --password-stdin
-          docker tag $IMAGE:0 $REPO/$IMAGE:$VERSION
+          docker tag $IMAGE $REPO/$IMAGE:$VERSION
           docker push $REPO/$IMAGE:$VERSION 
-
-          #docker tag $IMAGE:0 $REPO
-          #docker tag $IMAGE:0 $REPO/$IMAGE:$VERSION          
-          #docker tag $IMAGE:0 $REPO/$IMAGE:latest
-          # docker push aws_account_id.dkr.ecr.region.amazonaws.com/hello-repository
-          #docker push $REPO
-          #docker image push $REPO/$IMAGE:$VERSION           
-          #docker image push $REPO/$IMAGE
+          docker tag $IMAGE $REPO/$IMAGE:latest
+          docker push $REPO/$IMAGE:latest 
           echo ---
      
