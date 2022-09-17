@@ -2,7 +2,7 @@ name: Create API-service test Docker image
 on: push
 
 env:    
-  REPO: ${{secrets.DOCKERHUB_USERID}}
+  
   IMAGE: test-api-service
   VERSION: 2.2.${{github.run_number}}
   SRC_PATH: examples/nginx api devops/api service
@@ -23,6 +23,8 @@ jobs:
           docker image build -t $IMAGE:0 .
           echo ---
       - name: publish on DockerHub
+        env:
+          REPO: ${{secrets.DOCKERHUB_USERID}}
         run: |
           echo "### DockerHub login and Push image \"$IMAGE:$VERSION\" "
           #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} $DOCKERHUB_URL --password-stdin   
@@ -37,6 +39,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_DEVOP_ACCESS_KEY}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_DEVOP_ACCESS_SECRET}}
           AWS_REGION: eu-central-1
+          REPO: ${{secrets.AWS_ECR_URI}}
         run: |
           echo "### Push image on AWS ECR"
           #echo ${{secrets.AWS_DEVOP_ACCESS_SECRET}} | docker login -u ${{secrets.AWS_DEVOP_ACCESS_KEY}} ${{secrets.AWS_ECR_URI}} --password-stdin  
@@ -45,7 +48,7 @@ jobs:
           #password=$(aws ecr get-login-password --region eu-central-1 --profile devop
           # login using environment variables
           password=$(aws ecr get-login-password)
-          echo $password | docker login -u AWS ${{secrets.AWS_ECR_URI}} --password-stdin
+          echo $password | docker login -u AWS $REPO --password-stdin
           docker image tag $IMAGE:0 $REPO/$IMAGE:$VERSION
           docker image tag $IMAGE:0 $REPO/$IMAGE:latest
           docker image push $REPO/$IMAGE:$VERSION 
