@@ -5,7 +5,7 @@ host_secrets_path="D:/temp/secrets.json"
 
 echo "### Copy secrets in host path"
 echo "copy secrets file from \"$PWD\""
-cp "$PWD/scripts/secrets-example.json" $host_secrets_path
+cp "$PWD/scripts/.secrets.json" $host_secrets_path
 echo
 echo
 
