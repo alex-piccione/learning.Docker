@@ -1,7 +1,8 @@
 #!/bin/bash
 # must be run from parent folder
 
-host_secrets_path="D:/temp/secrets.json"
+host_secrets_path="/d/temp/secrets.json"
+container_secrets_path="/var/secrets/secrets.json"
 
 echo "### docker build ###"
 echo
@@ -15,6 +16,7 @@ docker container rm test-server -f
 # production: --restart=unless-stopped
 docker run -d -p 3001:3000 \
     --name test-server \
+    --mount type=bind,source=$host_secrets_path,target=$container_secrets_path,readonly \
     test-web-app:latest  
 echo
 echo  
@@ -32,4 +34,4 @@ function pause(){
 }
 
 ## Pause it ##
-#pause
+pause

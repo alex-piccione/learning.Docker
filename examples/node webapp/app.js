@@ -6,7 +6,7 @@ const { connect } = mongoose
 import CurrencyModel from "./models.js"
 
 const version = "1.3"
-const configFile = "D:/temp/secrets.json" // ""./secrets.json"
+const configFile = "/var/secrets/secrets.json" // ""./secrets.json"
 
 const readConfiguration = (success, failure) => {
   try {
