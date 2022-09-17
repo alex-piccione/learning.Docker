@@ -42,16 +42,16 @@ jobs:
           REPO: ${{secrets.AWS_ECR_URI}}
         run: |
           echo "### Push image on AWS ECR"
-          #echo ${{secrets.AWS_DEVOP_ACCESS_SECRET}} | docker login -u ${{secrets.AWS_DEVOP_ACCESS_KEY}} ${{secrets.AWS_ECR_URI}} --password-stdin  
-          #echo ${{secrets.AWS_DEVOP_PASSWORD}} | docker login -u ${{secrets.AWS_DEVOP_USERNAME}} ${{secrets.AWS_ECR_URI}} --password-stdin
-          #password=$(aws ecr get-login --no-include-email --region eu-central-1 --profile ${{secrets.AWS_DEVOP_USERNAME}})
-          #password=$(aws ecr get-login-password --region eu-central-1 --profile devop
-          # login using environment variables
+          # login using environment variables: 
           password=$(aws ecr get-login-password)
           echo $password | docker login -u AWS $REPO --password-stdin
-          docker image tag $IMAGE:0 $REPO/$IMAGE:$VERSION
-          docker image tag $IMAGE:0 $REPO/$IMAGE:latest
-          docker image push $REPO/$IMAGE:$VERSION 
-          docker image push $REPO/$IMAGE:latest
+          # docker tag hello-world:latest aws_account_id.dkr.ecr.region.amazonaws.com/hello-repository
+          #docker image tag $IMAGE:0 $REPO/$IMAGE:$VERSION
+          docker image tag $IMAGE:0 $REPO:$VERSION
+          #docker image tag $IMAGE:0 $REPO/$IMAGE:latest
+          # docker push aws_account_id.dkr.ecr.region.amazonaws.com/hello-repository
+          #docker image push $REPO/$IMAGE:$VERSION
+          docker image push $REPO:$VERSION 
+          #docker image push $REPO/$IMAGE:latest
           echo ---
      
