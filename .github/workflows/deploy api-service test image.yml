@@ -35,7 +35,8 @@ jobs:
       - name: publish on AWS ECR
         run: |
           echo "### Push image on AWS ECR"
-          echo ${{secrets.AWS_DEVOP_ACCESS_SECRET}} | docker login -u ${{secrets.AWS_DEVOP_ACCESS_KEY}} ${{secrets.AWS_ECR_URI}} --password-stdin  
+          #echo ${{secrets.AWS_DEVOP_ACCESS_SECRET}} | docker login -u ${{secrets.AWS_DEVOP_ACCESS_KEY}} ${{secrets.AWS_ECR_URI}} --password-stdin  
+          echo ${{secrets.AWS_DEVOP_PASSWORD}} | docker login -u ${{secrets.AWS_DEVOP_USERNAME}} ${{secrets.AWS_ECR_URI}} --password-stdin
           docker image tag $IMAGE:0 $REPO/$IMAGE:$VERSION
           docker image tag $IMAGE:0 $REPO/$IMAGE:latest
           docker image push $REPO/$IMAGE:$VERSION 
