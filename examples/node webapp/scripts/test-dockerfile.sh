@@ -7,7 +7,7 @@ container_secrets_path="/var/secrets/secrets.json"
 echo "### docker build ###"
 echo
 docker image rm test-web-app:latest -f
-docker build -t test-web-app:latest .
+docker build --rm -t test-web-app:latest .
 echo
 echo 
 echo "### docker run ###"
