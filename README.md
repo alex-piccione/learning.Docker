@@ -91,3 +91,6 @@ I'm trying to use the free tier.
 Region: eu-central-1 (Frankfurt)  
 https://console.aws.amazon.com/ecr/home?region=eu-central-1  
 Private address format: https://aws_account_id.dkr.ecr.region.amazonaws.com  
+
+How to use ``docker login`` with a IAM user?  
+https://aws.amazon.com/blogs/compute/authenticating-amazon-ecr-repositories-for-docker-cli-with-credential-helper/
