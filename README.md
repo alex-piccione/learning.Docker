@@ -93,4 +93,30 @@ https://console.aws.amazon.com/ecr/home?region=eu-central-1
 Private address format: https://aws_account_id.dkr.ecr.region.amazonaws.com  
 
 How to use ``docker login`` with a IAM user?  
-https://aws.amazon.com/blogs/compute/authenticating-amazon-ecr-repositories-for-docker-cli-with-credential-helper/
+https://aws.amazon.com/blogs/compute/authenticating-amazon-ecr-repositories-for-docker-cli-with-credential-helper/  
+AWS ECR Guide: https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html#registry_auth
+
+As usual... a nightmare!  
+
+``docker login`` cannot be used straightforward, I also tried to give to the IAM user Console access.  
+you need to obtain a "temporary password" from the AWS user credentials.  
+Official documentation suggests to use ``aws ecr get-login-password`` command.
+Fortunately ``aws ecr`` is a valid command in _ubuntu-latest_ image. 
+If the command returns the error: 
+> is not authorized to perform: ecr:GetAuthorizationToken on resource:* ...
+you need to provide some permissions. 
+I created this policy "ECR_get-login-password" and assigned to the group:
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Resource": "*",
+            "Effect": "Allow",
+            "Action": [
+                "ecr:GetAuthorizationToken"
+            ]
+        }
+    ]
+}
+```
