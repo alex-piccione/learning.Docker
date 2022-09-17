@@ -5,7 +5,7 @@ env:
   REPO: ${{secrets.DOCKERHUB_USERID}}
   IMAGE: test-api-service
   VERSION: 2.2.${{github.run_number}}
-  SRC_PATH: nginx api mongo devops
+  SRC_PATH: examples/nginx api mongo devops
 
 jobs:
   create_image:

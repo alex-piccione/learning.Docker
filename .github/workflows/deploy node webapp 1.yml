@@ -1,4 +1,4 @@
-name: Create Docker image
+name: Create Docker image of "Node webapp 1"
 on: push
 
 env:   
