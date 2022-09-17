@@ -81,3 +81,13 @@ To run a bash console in a container:
 
 ``docker container stop {container_id|container_name}`` to stop it
 ``docker container rm {container_id|container_name}``
+
+
+# Storing Docker Images on a Registry
+
+## AWS Elastic Container Registry
+1000 GB x month costs 0.1 USD.  
+I'm trying to use the free tier.  
+Region: eu-central-1 (Frankfurt)  
+https://console.aws.amazon.com/ecr/home?region=eu-central-1  
+Private address format: https://aws_account_id.dkr.ecr.region.amazonaws.com  
