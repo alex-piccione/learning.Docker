@@ -45,8 +45,8 @@ jobs:
           password=$(aws ecr get-login-password)
           echo $password | docker login -u AWS $REPO --password-stdin
           docker tag $IMAGE $REPO/$IMAGE:$VERSION
-          docker push $REPO/$IMAGE:$VERSION 
-          #docker tag $IMAGE $REPO/$IMAGE:latest
-          #docker push $REPO/$IMAGE:latest 
+          docker tag $IMAGE $REPO/$IMAGE:latest
+          docker push $REPO/$IMAGE:$VERSION          
+          docker push $REPO/$IMAGE:latest 
           echo ---
      
