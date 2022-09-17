@@ -16,4 +16,4 @@ function pause(){
 }
 
 ## Pause it ##
-pause
+#pause
