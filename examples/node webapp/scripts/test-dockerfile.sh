@@ -1,6 +1,8 @@
 #!/bin/bash
 # must be run from parent folder
 
+host_secrets_path="D:/temp/secrets.json"
+
 echo "### docker build ###"
 echo
 docker image rm test-web-app:latest -f
@@ -11,7 +13,9 @@ echo "### docker run ###"
 echo
 docker container rm test-server -f
 # production: --restart=unless-stopped
-docker run -d -p 3001:3000 --name test-server test-web-app:latest  
+docker run -d -p 3001:3000 \
+    --name test-server \
+    test-web-app:latest  
 echo
 echo  
 echo "### open http://localhost:3001 ###"
