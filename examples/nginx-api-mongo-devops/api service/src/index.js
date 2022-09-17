@@ -20,7 +20,7 @@ const readSecrets = (secretsFile) => {
 
 const logger = Logger(config.logFile)
 const secrets = readSecrets(config.secretsFile)
-const repository = Repository(secrets.MongoDB.username, secrets.MongoDB.password)
+const repository = Repository(secrets.MongoDB.connectionString)
 
 server.listen(config.serverPort, () => {
   console.log(`Server running on port ${config.serverPort}`)

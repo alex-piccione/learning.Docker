@@ -1,8 +1,7 @@
 import { MongoClient, ServerApiVersion } from "mongodb"
 
-const Repository = (username, password) => {
-  const uri = `mongodb+srv://${username}:${password}@cluster0.74mtl.mongodb.net/?retryWrites=true&w=majority`
-  const client = new MongoClient(uri, {
+const Repository = (connectionString) => {
+  const client = new MongoClient(connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     serverApi: ServerApiVersion.v1,
