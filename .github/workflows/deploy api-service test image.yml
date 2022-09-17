@@ -5,10 +5,11 @@ env:
   REPO: ${{secrets.DOCKERHUB_USERID}}
   IMAGE: test-api-service
   VERSION: 2.2.${{github.run_number}}
+  SRC_PATH: nginx api mongo devops
 
 jobs:
   create_image:
-    name: Create Docker image
+    name: Create Docker image for Nginx API service
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,12 +17,13 @@ jobs:
     
       - name: build
         run: |
-          echo build the image using the Dockerfile in examples/api-service folder
-          docker image build -t $IMAGE:0 -f "./examples/api service/Dockerfile" "./examples/api service"
+          echo "### Build the image using the Dockerfile"
+          cd "$SRC_PATH"
+          docker image build -t $IMAGE:0 -f "api service/Dockerfile" .
           echo ---
       - name: publish
         run: |
-          echo DockerHub login and Push image "$IMAGE:$VERSION"
+          echo "### DockerHub login and Push image \"$IMAGE:$VERSION\" "
           #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} $DOCKERHUB_URL --password-stdin   
           echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin   
           docker image tag $IMAGE:0 $REPO/$IMAGE:$VERSION
