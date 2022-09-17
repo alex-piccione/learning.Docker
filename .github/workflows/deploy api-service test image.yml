@@ -39,19 +39,19 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_DEVOP_ACCESS_KEY}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_DEVOP_ACCESS_SECRET}}
           AWS_REGION: eu-central-1
-          REPO: ${{secrets.AWS_ECR_URI}}
+          REPO: ${{secrets.AWS_ECR_URL}}
         run: |
           echo "### Push image on AWS ECR"
           # login using environment variables: 
           password=$(aws ecr get-login-password)
           echo $password | docker login -u AWS $REPO --password-stdin
           # docker tag hello-world:latest aws_account_id.dkr.ecr.region.amazonaws.com/hello-repository
-          docker tag $IMAGE:0 $REPO
+          #docker tag $IMAGE:0 $REPO
           #docker image tag $IMAGE:0 $REPO/$IMAGE:$VERSION          
-          #docker image tag $IMAGE:0 $REPO/$IMAGE:latest
+          docker image tag $IMAGE:0 $REPO/$IMAGE
           # docker push aws_account_id.dkr.ecr.region.amazonaws.com/hello-repository
           docker push $REPO
           #docker image push $REPO/$IMAGE:$VERSION           
-          #docker image push $REPO/$IMAGE:latest
+          docker image push $REPO/$IMAGE
           echo ---
      
