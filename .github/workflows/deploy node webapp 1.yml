@@ -18,9 +18,9 @@ jobs:
     
       - name: build
         run: |
-          echo build the image using the Dockerfile in webapp folder
-          cd webapp
-          docker image build -t $IMAGE:0 -f "$SRC_PATH/devops/Dockerfile.3" .
+          echo "### Build the image using the Dockerfile in webapp folder ###"
+          cd "$SRC_PATH"
+          docker image build -t $IMAGE:0 -f "devops/Dockerfile.3" .
           echo ---
           
           #echo TODO echo docker.pkg.github.com
