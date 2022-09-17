@@ -22,13 +22,23 @@ jobs:
           #docker image build -t $IMAGE:0 -f "api service/Dockerfile" "api service"
           docker image build -t $IMAGE:0 .
           echo ---
-      - name: publish
+      - name: publish on DockerHub
         run: |
           echo "### DockerHub login and Push image \"$IMAGE:$VERSION\" "
           #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} $DOCKERHUB_URL --password-stdin   
           echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin   
           docker image tag $IMAGE:0 $REPO/$IMAGE:$VERSION
-          docker image tag $IMAGE:0 $REPO/$IMAGE:latest               
+          docker image tag $IMAGE:0 $REPO/$IMAGE:latest
           docker image push $REPO/$IMAGE:$VERSION 
           docker image push $REPO/$IMAGE:latest
           echo ---
+      - name: publish on AWS ECR
+        run: |
+          echo "### Push image on AWS ECR"
+          echo ${{secrets.AWS_DEVOP_ACCESS_SECRET}} | docker login -u ${{secrets.AWS_DEVOP_ACCESS_KEY}} ${{secrets.AWS_ECR_URI}} --password-stdin  
+          docker image tag $IMAGE:0 $REPO/$IMAGE:$VERSION
+          docker image tag $IMAGE:0 $REPO/$IMAGE:latest
+          docker image push $REPO/$IMAGE:$VERSION 
+          docker image push $REPO/$IMAGE:latest
+          echo ---
+     
