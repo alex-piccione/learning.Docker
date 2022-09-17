@@ -19,7 +19,6 @@ jobs:
         run: |
           echo "### Build the image using the Dockerfile"
           cd "$SRC_PATH"
-          #docker image build -t $IMAGE:0 -f "api service/Dockerfile" "api service"
           docker image build -t $IMAGE .
           echo ---
       - name: publish on DockerHub
@@ -47,7 +46,7 @@ jobs:
           echo $password | docker login -u AWS $REPO --password-stdin
           docker tag $IMAGE $REPO/$IMAGE:$VERSION
           docker push $REPO/$IMAGE:$VERSION 
-          docker tag $IMAGE $REPO/$IMAGE:latest
-          docker push $REPO/$IMAGE:latest 
+          #docker tag $IMAGE $REPO/$IMAGE:latest
+          #docker push $REPO/$IMAGE:latest 
           echo ---
      
