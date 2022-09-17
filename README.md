@@ -120,3 +120,12 @@ I created this policy "ECR_get-login-password" and assigned to the group:
     ]
 }
 ```
+
+docker push on GitHub Actions hanging and fails with EOF:  
+https://stackoverflow.com/questions/70828205/pushing-an-image-to-ecr-getting-retrying-in-seconds  
+
+Add policies to the repository...  
+No, crea epolicy for ECR Actions (all resources) and add it to User Group of the user.  
+
+
+In the end the "AmazonEC2ContainerRegistryPowerUser" policy contains ALL, also the get-login-password permission.
