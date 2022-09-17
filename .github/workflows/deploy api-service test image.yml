@@ -5,7 +5,7 @@ env:
   REPO: ${{secrets.DOCKERHUB_USERID}}
   IMAGE: test-api-service
   VERSION: 2.2.${{github.run_number}}
-  SRC_PATH: examples/nginx api mongo devops
+  SRC_PATH: examples/nginx api devops/api service
 
 jobs:
   create_image:
@@ -19,7 +19,8 @@ jobs:
         run: |
           echo "### Build the image using the Dockerfile"
           cd "$SRC_PATH"
-          docker image build -t $IMAGE:0 -f "api service/Dockerfile" .
+          #docker image build -t $IMAGE:0 -f "api service/Dockerfile" "api service"
+          docker image build -t $IMAGE:0 .
           echo ---
       - name: publish
         run: |
