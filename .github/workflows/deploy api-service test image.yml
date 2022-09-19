@@ -2,13 +2,14 @@ name: Create API-service test Docker image
 on: push
 
 env:    
-  REPO: ${{secrets.DOCKERHUB_USERID}}
+  
   IMAGE: test-api-service
   VERSION: 2.2.${{github.run_number}}
+  SRC_PATH: examples/nginx api devops/api service
 
 jobs:
   create_image:
-    name: Create Docker image
+    name: Create Docker image for Nginx API service
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,16 +17,36 @@ jobs:
     
       - name: build
         run: |
-          echo build the image using the Dockerfile in examples/api-service folder
-          docker image build -t $IMAGE:0 -f "./examples/api service/Dockerfile" "./examples/api service"
+          echo "### Build the image using the Dockerfile"
+          cd "$SRC_PATH"
+          docker image build -t $IMAGE .
           echo ---
-      - name: publish
+      - name: publish on DockerHub
+        env:
+          REPO: ${{secrets.DOCKERHUB_USERID}}
         run: |
-          echo DockerHub login and Push image "$IMAGE:$VERSION"
+          echo "### DockerHub login and Push image \"$IMAGE:$VERSION\" "
           #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} $DOCKERHUB_URL --password-stdin   
-          echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin   
-          docker image tag $IMAGE:0 $REPO/$IMAGE:$VERSION
-          docker image tag $IMAGE:0 $REPO/$IMAGE:latest               
+          echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin           
+          docker image tag $IMAGE $REPO/$IMAGE:$VERSION
+          docker image tag $IMAGE $REPO/$IMAGE:latest
           docker image push $REPO/$IMAGE:$VERSION 
           docker image push $REPO/$IMAGE:latest
           echo ---
+      - name: publish on AWS ECR
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_DEVOP_ACCESS_KEY}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_DEVOP_ACCESS_SECRET}}
+          AWS_REGION: eu-central-1
+          REPO: ${{secrets.AWS_ECR_URL}}
+        run: |
+          echo "### Push image on AWS ECR"
+          # login using environment variables: 
+          password=$(aws ecr get-login-password)
+          echo $password | docker login -u AWS $REPO --password-stdin
+          docker tag $IMAGE $REPO/$IMAGE:$VERSION
+          docker tag $IMAGE $REPO/$IMAGE:latest
+          docker push $REPO/$IMAGE:$VERSION          
+          docker push $REPO/$IMAGE:latest 
+          echo ---
+     

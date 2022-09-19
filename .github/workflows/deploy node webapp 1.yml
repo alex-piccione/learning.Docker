@@ -1,4 +1,4 @@
-name: Create Docker image
+name: Create Docker image of "Node webapp 1"
 on: push
 
 env:   
@@ -6,6 +6,7 @@ env:
   VERSION: 1.0.${{github.run_number}}
   CANISTER_URL: cloud.canister.io:5000
   CR_URL: c8n.io
+  SRC_PATH: examples/node webapp 1
 
 
 jobs:
@@ -17,12 +18,12 @@ jobs:
     
       - name: build
         run: |
-          echo build the image using the Dockerfile in webapp folder
-          cd webapp
-          docker image build -t $IMAGE:0 -f devops/Dockerfile.3 .
+          echo "### Build the image using the Dockerfile in webapp folder ###"
+          cd "$SRC_PATH"
+          docker image build -t $IMAGE:0 -f "devops/Dockerfile.3" .
           echo ---
           
-          #echo TODO echo docker.pkg.github.com
+          #echo "### docker.pkg.github.com"
           #echo ---
           #echo Docker login and Push
           #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin
@@ -30,7 +31,7 @@ jobs:
           #docker image push ${{secrets.DOCKERHUB_USERID}}/$REPO:latest
           #echo ---
           
-          echo Canister login and Push
+          echo "### Canister login and Push"
           echo ${{secrets.CANISTER_PWD}} | docker login -u ${{secrets.CANISTER_USERID}} $CANISTER_URL --password-stdin   
           docker image tag $IMAGE:0 $CANISTER_URL/${{secrets.CANISTER_USERID}}/$IMAGE:$VERSION
           docker image tag $IMAGE:0 $CANISTER_URL/${{secrets.CANISTER_USERID}}/$IMAGE:latest                 
@@ -39,7 +40,7 @@ jobs:
           docker image pull $CANISTER_URL/${{secrets.CANISTER_USERID}}/$IMAGE:latest
           echo ---
           
-          echo Container Registry Login and Push
+          echo "### Container Registry (c8n.io) login and Push"
           echo ${{secrets.CR_PWD}} | docker login -u ${{secrets.CR_USERID}} $CR_URL --password-stdin          
           docker image tag $IMAGE:0 $CR_URL/${{secrets.CR_USERID}}/$IMAGE:$VERSION
           docker image tag $IMAGE:0 $CR_URL/${{secrets.CR_USERID}}/$IMAGE:latest          
