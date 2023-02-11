@@ -1,5 +1,5 @@
 # NGINX API example 
-ame: Create API-service test Docker image
+name: Create API-service test Docker image
 on: push
 
 env:  
