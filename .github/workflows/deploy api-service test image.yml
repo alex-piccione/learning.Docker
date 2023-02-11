@@ -20,13 +20,14 @@ jobs:
           echo "### Build the image using the Dockerfile"
           cd "$SRC_PATH"
           docker image build -t $IMAGE .
+          docker save $IMAGE > image.tar
           echo ---
 
       - name: Create artifact
         uses: actions/upload-artifact@v3
         with:
-          name: docker-image-artifact
-          path: docker-image.tar
+          name: docker-artifact
+          path: image.tar
 
       #- name: Publish on DockerHub
       #  env:
@@ -70,7 +71,7 @@ jobs:
       - name: Load Docker image
         uses: docker/load-image-action@v3
         with:
-          file: docker-image-artifact/docker-image.tar
+          file: docker-artifact/image.tar
       - name: Publish on DockerHub
         env:
           REPO: ${{secrets.DOCKERHUB_USERID}}
@@ -96,7 +97,7 @@ jobs:
       - name: Load Docker image
         uses: docker/load-image-action@v3
         with:
-          file: docker-image-artifact/docker-image.tar
+          file: docker-artifact/image.tar
       - name: Publish on AWS ECR
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_DEVOP_ACCESS_KEY}}
