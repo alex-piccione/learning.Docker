@@ -23,7 +23,7 @@ jobs:
           echo ---
 
       - name: Create artifact
-        use: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3
         with:
           name: docker-image-artifact
           path: docker-image.tar
