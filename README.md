@@ -1,7 +1,8 @@
 # Learning Docker
 
 Personal study of Docker  
-[![Create Docker image](https://github.com/alex-piccione/learning.docker/actions/workflows/deploy.yml/badge.svg)](https://github.com/alex-piccione/learning.docker/actions/workflows/deploy.yml)
+[![deploy api-service test image.yml](https://github.com/alex-piccione/learning.docker/actions/workflows/deploy api-service test image.yml/badge.svg)](https://github.com/alex-piccione/learning.docker/actions/workflows/deploy api-service test image.yml)
+[![deploy node webapp 1.yml](https://github.com/alex-piccione/learning.docker/actions/workflows/deploy node webapp 1.yml/badge.svg)](https://github.com/alex-piccione/learning.docker/actions/workflows/deploy node webapp 1.yml)
 
 ## Courses
 
@@ -17,7 +18,7 @@ Pluralsight [Docker fundamentals for developer](https://app.pluralsight.com/path
 - [X] Docker Swarm (service)
 - [ ] Docker Stacks
 - [X] Docker Network
-- [ ] Docker Volumes/Bind mounts
+- [X] Docker Volumes/Bind mounts
 
 ## Build an image
 
