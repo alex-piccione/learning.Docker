@@ -1,4 +1,5 @@
-name: Create API-service test Docker image
+# NGINX API example 
+ame: Create API-service test Docker image
 on: push
 
 env:  
@@ -20,6 +21,12 @@ jobs:
           cd "$SRC_PATH"
           docker image build -t $IMAGE .
           echo ---
+
+      - name: Create artifact
+        use: actions/upload-artifact@v3
+        with:
+          name: docker-image-artifact
+          path: docker-image.tar
 
       - name: Publish on DockerHub
         env:
@@ -50,4 +57,32 @@ jobs:
           docker push $REPO/$IMAGE:$VERSION          
           docker push $REPO/$IMAGE:latest 
           echo ---
-     
+  
+  publish_ECR:
+    name: Publish image on AWS ECR
+    needs: create_image
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Get immage artifact
+        use: actions/download-artifact@v3
+        with:
+          name: docker-image
+      - name: Load Docker image
+        uses: docker/load-image-action@v3
+        with:
+          file: docker-image-artifact/docker-image.tar
+      - name: Publish on DockerHub 2
+        env:
+          REPO: ${{secrets.DOCKERHUB_USERID}}
+        run: |
+          echo "### DockerHub login and Push image \"$IMAGE:$VERSION\" "
+          #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} $DOCKERHUB_URL --password-stdin   
+          echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin           
+          docker image tag $IMAGE $REPO/$IMAGE:$VERSION
+          docker image tag $IMAGE $REPO/$IMAGE:latest
+          docker image push $REPO/$IMAGE:$VERSION 
+          docker image push $REPO/$IMAGE:latest
+          echo ---
+      
+        
+          
