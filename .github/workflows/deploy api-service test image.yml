@@ -25,6 +25,8 @@ jobs:
           docker save $IMAGE > image.tar
           echo ls ../../
           ls ../../
+          echo ls .
+          ls .
 
       - name: Create artifact
         uses: actions/upload-artifact@v3
