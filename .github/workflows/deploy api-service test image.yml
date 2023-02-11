@@ -28,18 +28,18 @@ jobs:
           name: docker-image-artifact
           path: docker-image.tar
 
-      - name: Publish on DockerHub
-        env:
-          REPO: ${{secrets.DOCKERHUB_USERID}}
-        run: |
-          echo "### DockerHub login and Push image \"$IMAGE:$VERSION\" "
-          #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} $DOCKERHUB_URL --password-stdin   
-          echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin           
-          docker image tag $IMAGE $REPO/$IMAGE:$VERSION
-          docker image tag $IMAGE $REPO/$IMAGE:latest
-          docker image push $REPO/$IMAGE:$VERSION 
-          docker image push $REPO/$IMAGE:latest
-          echo ---
+      #- name: Publish on DockerHub
+      #  env:
+      #    REPO: ${{secrets.DOCKERHUB_USERID}}
+      #  run: |
+      #    echo "### DockerHub login and Push image \"$IMAGE:$VERSION\" "
+      #    #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} $DOCKERHUB_URL --password-stdin   
+      #    echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin           
+      #    docker image tag $IMAGE $REPO/$IMAGE:$VERSION
+      #    docker image tag $IMAGE $REPO/$IMAGE:latest
+      #    docker image push $REPO/$IMAGE:$VERSION 
+      #    docker image push $REPO/$IMAGE:latest
+      #    echo ---
 
       - name: Publish on AWS ECR
         env:
@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: Get immage artifact
-        use: actions/download-artifact@v3
+        uses: actions/download-artifact@v3
         with:
           name: docker-image
       - name: Load Docker image
