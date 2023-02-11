@@ -22,6 +22,7 @@ jobs:
           echo save image.tar
           docker save $IMAGE > ../../image.tar
           docker save $IMAGE > ../image.tar
+          docker save $IMAGE > image.tar
           echo ls ../../
           ls ../../
 
