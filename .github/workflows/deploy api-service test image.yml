@@ -7,7 +7,7 @@ env:
   SRC_PATH: examples/nginx api devops/api service
 
 jobs:
-  create image:
+  create_image:
     name: Create Docker image for Nginx API service
     runs-on: ubuntu-latest
     steps:
