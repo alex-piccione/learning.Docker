@@ -58,8 +58,8 @@ jobs:
           docker push $REPO/$IMAGE:latest 
           echo ---
   
-  publish_ECR:
-    name: Publish image on AWS ECR
+  publish_dockerhub:
+    name: Publish image on DockerHub
     needs: create_image
     runs-on: ubuntu-latest
     steps: 
@@ -82,7 +82,34 @@ jobs:
           docker image tag $IMAGE $REPO/$IMAGE:latest
           docker image push $REPO/$IMAGE:$VERSION 
           docker image push $REPO/$IMAGE:latest
-          echo ---
-      
+          echo ---      
         
-          
+  publish_ECR:
+    name: Publish image on AWS ECR
+    needs: create_image
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Get immage artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image
+      - name: Load Docker image
+        uses: docker/load-image-action@v3
+        with:
+          file: docker-image-artifact/docker-image.tar
+      - name: Publish on AWS ECR
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_DEVOP_ACCESS_KEY}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_DEVOP_ACCESS_SECRET}}
+          AWS_REGION: eu-central-1
+          REPO: ${{secrets.AWS_ECR_URL}}
+        run: |
+          echo "### Push image on AWS ECR"
+          # login using environment variables: 
+          password=$(aws ecr get-login-password)
+          echo $password | docker login -u AWS $REPO --password-stdin
+          docker tag $IMAGE $REPO/$IMAGE:$VERSION
+          docker tag $IMAGE $REPO/$IMAGE:latest
+          docker push $REPO/$IMAGE:$VERSION          
+          docker push $REPO/$IMAGE:latest 
+          echo ---
