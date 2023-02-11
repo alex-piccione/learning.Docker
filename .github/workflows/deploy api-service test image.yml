@@ -32,7 +32,8 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: docker-artifact
-          path: ./image.tar
+          #path: ./image.tar
+          path: stocazzo.txt
           if-no-files-found: error
 
       #- name: Publish on DockerHub
