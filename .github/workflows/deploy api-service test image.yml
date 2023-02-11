@@ -19,7 +19,11 @@ jobs:
         run: |
           cd "$SRC_PATH"
           docker image build -t $IMAGE .
+          echo save image.tar
           docker save $IMAGE > ../../image.tar
+          docker save $IMAGE > ../image.tar
+          echo ls ../../
+          ls ../../
 
       - name: Create artifact
         uses: actions/upload-artifact@v3
