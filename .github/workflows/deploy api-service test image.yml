@@ -28,6 +28,7 @@ jobs:
         with:
           name: docker-artifact
           path: image.tar
+          if-no-files-found: error
 
       #- name: Publish on DockerHub
       #  env:
