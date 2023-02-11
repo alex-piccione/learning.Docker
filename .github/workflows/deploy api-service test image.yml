@@ -19,12 +19,13 @@ jobs:
           cd "$SRC_PATH"
           docker image build -t $IMAGE .
           echo save image.tar
-          docker save $IMAGE > image.tar
+          docker save $IMAGE > ../../../image.tar
       - name: Create artifact
         uses: actions/upload-artifact@v3
         with:
           name: docker-artifact
-          path: $SRC_PATH/image.tar
+          #path: $SRC_PATH/image.tar
+          path: image.tar
           if-no-files-found: error
 
       #- name: Publish on DockerHub
