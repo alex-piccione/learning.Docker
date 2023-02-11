@@ -17,11 +17,10 @@ jobs:
     
       - name: Build Docker image
         run: |
-          echo "### Build the image using the Dockerfile"
+          #echo "### Build the image using the Dockerfile"
           cd "$SRC_PATH"
-          docker image build -t $IMAGE . | docker save $IMAGE > image.tar
-          ls
-          echo ---
+          docker image build -t $IMAGE . && docker save $IMAGE > ../image.tar
+          #echo ---
 
       - name: Create artifact
         uses: actions/upload-artifact@v3
