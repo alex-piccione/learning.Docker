@@ -13,27 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-    
+        uses: actions/checkout@v3    
       - name: Build Docker image
         run: |
           cd "$SRC_PATH"
           docker image build -t $IMAGE .
           echo save image.tar
-          docker save $IMAGE > ../../image.tar
-          docker save $IMAGE > ../image.tar
           docker save $IMAGE > image.tar
-          echo ls ../../
-          ls ../../
-          echo ls .
-          ls .
-
       - name: Create artifact
         uses: actions/upload-artifact@v3
         with:
           name: docker-artifact
-          #path: ./image.tar
-          path: stocazzo.txt
+          path: $SRC_PATH/image.tar
           if-no-files-found: error
 
       #- name: Publish on DockerHub
