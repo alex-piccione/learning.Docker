@@ -71,7 +71,7 @@ jobs:
         run: |
           echo load docker image
           ls 
-          doker image load -i image.tar
+          docker image load -i image.tar
       - name: Publish on DockerHub
         env:
           REPO: ${{secrets.DOCKERHUB_USERID}}
