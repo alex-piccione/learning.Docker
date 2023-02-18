@@ -68,9 +68,10 @@ jobs:
         with:
           name: docker-image
       - name: Load Docker image
-        uses: docker/load-image-action@v3
-        with:
-          file: docker-artifact/image.tar
+        run: |
+          echo load docker image
+          ls 
+          doker image load -i image.tar
       - name: Publish on DockerHub
         env:
           REPO: ${{secrets.DOCKERHUB_USERID}}
