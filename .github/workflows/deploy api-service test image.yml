@@ -68,10 +68,7 @@ jobs:
         with:
           name: docker-artifact
       - name: Load Docker image
-        run: |
-          echo load docker image
-          ls 
-          docker image load -i image.tar
+        run: docker image load -i image.tar
       - name: Publish on DockerHub
         env:
           REPO: ${{secrets.DOCKERHUB_USERID}}
@@ -93,11 +90,9 @@ jobs:
       - name: Get immage artifact
         uses: actions/download-artifact@v3
         with:
-          name: docker-image
+          name: docker-artifact
       - name: Load Docker image
-        uses: docker/load-image-action@v3
-        with:
-          file: docker-artifact/image.tar
+        run: docker image load -i image.tar
       - name: Publish on AWS ECR
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_DEVOP_ACCESS_KEY}}
