@@ -1,0 +1,8 @@
+version: '3'
+services:
+  web:
+    image: alessandropiccione/test-api-service
+    ports: 
+      - 80:80
+
+  #api:
