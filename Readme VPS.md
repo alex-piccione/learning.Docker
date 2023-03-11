@@ -4,10 +4,9 @@
 Manage Docker on a remote server.  
 Connect with SSH and execute commands from there.  
 
-```
+```sh
 server=<IP>
 username=root
-pwd=???
 ```
 
 Conenct with SSH: ``ssh username@server`` or ``ssh $username@$server``
