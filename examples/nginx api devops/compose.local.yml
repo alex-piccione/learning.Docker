@@ -1,0 +1,28 @@
+# Docker Compose file to run containers locally
+# launch it with: docker-compose -f compose.local.yml up --force-recreate
+
+version: "3.9"
+name: test-api-service
+services:
+  api:
+    container_name: API
+    image: test-api-service
+    build:
+      context: api service
+      dockerfile: Dockerfile
+    environment:
+      - config_file_path=/devop/config/api-service/configuration.json
+      - server_port=3001
+    ports: 
+      - 3008:3001
+    volumes:
+      # /path/on/host:/path/in/container
+      - d:/Programming/devop:/devop
+    
+#volumes:
+#  devop:
+#    name: "Devop-volume"
+#    driver: local
+#      type: local
+#      device: /Programming/devop
+#    #external: true

@@ -5,10 +5,10 @@ import Repository from "./repository.js"
 
 // read settings from Environment
 const configurationFile = process.env.config_file_path
-//const serverPort = process.env.server_port
+const serverPort = process.env.server_port
 
-console.log("configurationFile:", configurationFile)
-//console.log("serverPort:", sererPort)
+console.log("** configurationFile:", configurationFile)
+console.log("** serverPort:", serverPort)
 
 const configuration = readConfiguration(configurationFile)
 
@@ -17,9 +17,9 @@ const server = express()
 const logger = Logger(configuration.logFile)
 const repository = Repository(configuration.MongoDB.connectionString)
 
-server.listen(configuration.serverPort, () => {
-  console.info(`Server version "${configuration.version}" running on port ${configuration.serverPort}. http://localhost:${configuration.serverPort}`)
-  logger.info(`Server start. Version: ${configuration.version}. Port: ${configuration.serverPort}.`)
+server.listen(serverPort, () => {
+  console.info(`Server version "${configuration.version}" running on port ${serverPort}. http://localhost:${serverPort}`)
+  logger.info(`Server start. Version: ${configuration.version}. Port: ${serverPort}.`)
 })
 
 server.get("/", (req, res) => {
@@ -45,14 +45,19 @@ server.get("/", (req, res) => {
 })
 
 server.get("/api/info", (req, res) => {
-  res.json(
-    {
-      time: new Date().getTime(),
-      version: configuration.version,
-      status: "OK"
-    }
-    // suggested: ['Kaz Hawkins', 'Michael Kiwanuka']" + "}"
-  )
+
+  const data =       {
+    time: new Date().getTime(),
+    version: configuration.version,
+    status: "OK"
+  }
+
+  // suggested: ['Kaz Hawkins', 'Michael Kiwanuka']" + "}"
+
+  if (req.accepts("text/json"))
+    res.json(data)    
+  else
+    res._write(JSON.stringify(data))
 })
 
 server.get("/currencies", (req, res) => {

@@ -48,3 +48,6 @@ Please notice that you'll see many examples using the `-v` or `--volume` flags i
 ## Example of MongoDB container that store data on the host
 
 ``docker run --name test-mongo mongo:latest``
+
+## Docker-compose
+
