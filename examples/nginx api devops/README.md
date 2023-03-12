@@ -13,7 +13,7 @@ TODO:
 
 - [x] Able to run the API service locally
   - [x] README contains the command(s) to start the service
-- [ ] API Service should expose /info endpoint that return the version
+- [x] API Service should expose /api/info endpoint that return the version
 - [ ] Bash command to copy /secrets/api-secrets.json file on host server
 - [x] GitHub action to create images and publish on some Docker image repository
   - [x] "deploy api-service test image.yml"
@@ -55,23 +55,30 @@ open http://localhost:3000/version
 Copy the config file on the server:
 ``scp "/d/secrets/api-service.secrets.json" $user@${server_ip}:/devop/conf/api-service/secrets.json``
 
-## How to sun all the servies
+Install Docker Compose on the server.
 
-Freom  local root:
+(Ubuntu):
+``sudo apt-get update``
+``sudo apt-get install docker-compose-plugin``
+check with: ``docker-compose version``
+
+
+## How to sun all the services
+
+From local root:
 ``docker-compose up``
-``docker-compose up --force-recreate -d``
+``docker-compose -f compose.local.yml up --force-recreate``
 
- 
+## Deploy to production
 
+### Setup
 
-## Host file structure
+Host file structure
 
 ```
-/devops
-  /conf
+/devop
+  /config
     /api_service/conf.json
-  /apps  
-    /api_service
   /data
     /api_service_mongodb
   /logs
@@ -79,3 +86,6 @@ Freom  local root:
   /scripts
     /api_service
 ```
+
+### GitHub action
+
