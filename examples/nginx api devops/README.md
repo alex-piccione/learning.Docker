@@ -5,12 +5,17 @@ This is a full example of deploy a Nginx load balancer for a multi instance web 
 ![images](diagrams/Infrastructure%20with%20NGINX.drawio.png)
 
 
+This is the **local root path**: 
+``cd /d/Programming/Docker\ and\ Kubernetes/learning.Docker/examples/nginx\ api\ devops/``
+``cd "D:\Programming\Docker and Kubernetes\learning.Docker\examples\nginx api devops"``
+
 TODO:
 
-- [ ] Able to run the service locally
-  - [ ] ac: README contains the command(s) to start the service
-- [ ] Service should expose /version endpoint
-- [x] GitHub action to create images and publish on some Docker Image repository
+- [x] Able to run the API service locally
+  - [x] README contains the command(s) to start the service
+- [ ] API Service should expose /info endpoint that return the version
+- [ ] Bash command to copy /secrets/api-secrets.json file on host server
+- [x] GitHub action to create images and publish on some Docker image repository
   - [x] "deploy api-service test image.yml"
   - [ ] API service image
   - [x] Nginx image 
@@ -20,17 +25,57 @@ TODO:
   - [ ] test: when removing containers on docker, it will recreate them
 - [ ] GitHub action to update containers on deploy
   - [ ] test: after deploy, the services are updated with new version
+- [ ] GitHub action to run Dockerfile or Docker-compose ?
+  - docker-compose because it manages all in one place (network, configs etc...)
 
 ## How to setup local environment
 
+Api server use secrets from local _/secrets/api-secrets.json_ file (check "api service/config.js").   
+
+Go to local root path.
+``sh
 cd "api service"
 npm install
+``
 
 ## How to run the service locally
 
-_start-api.sh_:
+Go to local root path.
+_./start-api.sh_:
 ``sh
 cd "api service"
 npm start
 open http://localhost:3000/version
 ``
+
+[api service/README.md](api%20service/README.md) contains instructions to use the service.
+
+## How to setup server
+
+Copy the config file on the server:
+``scp "/d/secrets/api-service.secrets.json" $user@${server_ip}:/devop/conf/api-service/secrets.json``
+
+## How to sun all the servies
+
+Freom  local root:
+``docker-compose up``
+``docker-compose up --force-recreate -d``
+
+ 
+
+
+## Host file structure
+
+```
+/devops
+  /conf
+    /api_service/conf.json
+  /apps  
+    /api_service
+  /data
+    /api_service_mongodb
+  /logs
+    /api_service/(log files)
+  /scripts
+    /api_service
+```

@@ -1,0 +1,9 @@
+{
+    "version": "0.1-example",
+    "serverPort": 3005,
+    "logFile": "<path to log file>",
+    "MongoDB": {
+        "connectionString": "<connection string>",
+        "database": "<database>"
+    }
+}

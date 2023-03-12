@@ -3,3 +3,4 @@
 **.env.local
 **/.secrets/
 .secrets.*
+examples/nginx api devops/api service/src/configuration.local.json

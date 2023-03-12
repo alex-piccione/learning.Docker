@@ -16,5 +16,6 @@ VOLUME /secrets
 
 #ENV PORT 3005
 EXPOSE 3005
+#ENV config_file_path /devop/conf/api-service/configuration.json
 
 CMD ["node", "./index.js"]

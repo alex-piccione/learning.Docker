@@ -1,8 +1,10 @@
 version: '3'
 services:
   web:
-    image: alessandropiccione/test-api-service
+    image: alessandropiccione/test-api-service:latest
     ports: 
       - 80:80
+    environment:
+      - config_file_path=/devop/conf/api-service/configuration_2.json
 
   #api:

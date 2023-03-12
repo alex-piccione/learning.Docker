@@ -1,9 +1,16 @@
 # api-server NodeJs application
 
-Simple Node app that responsd to:
+## Setup
 
-- GET / (HTML)
-- GET /api/inso (JSON)
+_config.js_ read configuration from a secret file stored on local machine.  
+It has the structure of _api-secrets.example.json_.
+
+## API endpoints
+
+Simple Node app that respond to:
+
+- GET /         (HTML)
+- GET /api/info (JSON)
 
 To run locally: `yarn start`
 

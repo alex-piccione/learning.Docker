@@ -1,35 +1,30 @@
 import express from "express"
-import config from "./config.js"
+import { readConfiguration } from "./config.js"
 import Logger from "./logger.js"
 import Repository from "./repository.js"
-import fs from "fs"
 
-const version = "2.2"
+// read settings from Environment
+const configurationFile = process.env.config_file_path
+//const serverPort = process.env.server_port
+
+console.log("configurationFile:", configurationFile)
+//console.log("serverPort:", sererPort)
+
+const configuration = readConfiguration(configurationFile)
+
 const server = express()
 
-const readSecrets = (secretsFile) => {
-  try {
-    const secretsData = fs.readFileSync(secretsFile, "UTF8")
-    return JSON.parse(secretsData)
-  } catch (err) {
-    console.log(`Failed to load secrets. ${err}`)
-    logger.log(`Failed to load secrets. ${err}`)
-    throw new Error(`Failed to load secrets. ${err}`)
-  }
-}
+const logger = Logger(configuration.logFile)
+const repository = Repository(configuration.MongoDB.connectionString)
 
-const logger = Logger(config.logFile)
-const secrets = readSecrets(config.secretsFile)
-const repository = Repository(secrets.MongoDB.connectionString)
-
-server.listen(config.serverPort, () => {
-  console.log(`Server running on port ${config.serverPort}`)
+server.listen(configuration.serverPort, () => {
+  console.info(`Server version "${configuration.version}" running on port ${configuration.serverPort}. http://localhost:${configuration.serverPort}`)
+  logger.info(`Server start. Version: ${configuration.version}. Port: ${configuration.serverPort}.`)
 })
 
 server.get("/", (req, res) => {
   const body = `<html>
-        <h1>Hello World <small>(version: ${version})</small></h1>
-        <p>A: ${secrets && secrets.Test}</p>
+        <h1>Hello World <small>(version: ${configuration.version})</small></h1>
 
         <h3>Pages</h3>
         <menu>            
@@ -51,7 +46,12 @@ server.get("/", (req, res) => {
 
 server.get("/api/info", (req, res) => {
   res.json(
-    "{time: " + new Date().getTime() + ", status: 'OK'" + ", suggested: ['Kaz Hawkins', 'Michael Kiwanuka']" + "}"
+    {
+      time: new Date().getTime(),
+      version: configuration.version,
+      status: "OK"
+    }
+    // suggested: ['Kaz Hawkins', 'Michael Kiwanuka']" + "}"
   )
 })
 

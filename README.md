@@ -57,7 +57,7 @@ docker image push portfolio-app:latest
 
 ## Run a container
 
-``docker container run``
+``docker container run <image>`` or ``docker run <image>``
 
 - -d = run in the background (detached)
 - --name {name}
