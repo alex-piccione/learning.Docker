@@ -6,6 +6,7 @@ services:
   api:
     container_name: API
     image: alessandropiccione/test-api-service:latest
+    restart: on-failure
     environment:
       - config_file_path=/devop/config/api-service/configuration.json
       - server_port=3010

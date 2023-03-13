@@ -6,14 +6,17 @@
 
 ## requires SSH comnnection opened
 
-read -p "devop user:" user
+read -p "devop user:" devop_user
 read -p "server ip: " server_ip
 
+# or use already set defaults:
+devop_user=$devop_user
+server_ip=$mercury
 
 ## copy "/secrets/conf/api-service.secrets.json" to "/devop/conf/api-service/secrets.json"
 
 # curly brackets are used to escape the variable followed by colon (:)
-scp "/d/Programming/devop/config/api-service/configuration.json" $user@${server_ip}:/devop/config/api-service/configuration.json
+scp "/d/Programming/devop/config/api-service/configuration.json" $devop_user@${server_ip}:/devop/config/api-service/configuration.json
 
 # another syntax for Windows
 #scp "d:/Programming/devop/config/api-service/configuration.json" $user@${server_ip}:/devop/config/api-service/configuration.json
@@ -24,9 +27,10 @@ scp "/d/Programming/devop/config/api-service/configuration.json" $user@${server_
 read -p "project root folder (parent of devops folder): " project_folder
 # /d/Programming/Docker\ and\ Kubernetes/learning.Docker/examples/nginx\ api\ devops
 
-#cp deploy.sh "/d/Programming/devop/sripts/api-service/deploy.sh"
-scp "$project_folder/devops/deploy.sh" $user@${server_ip}:/devop/scripts/api-service/deploy.sh
+#scp "$project_folder/devops/deploy.sh" $user@${server_ip}:/devop/scripts/api-service/deploy.sh
+scp "$PWD/deploy.sh" $devop_user@${server_ip}:/devop/scripts/api-service/deploy.sh
 ssh $user@${server_ip} chmod g+wx /devop/scripts/api-service/deploy.sh
 
 #cp compose.yml "/d/Programming/devop/sripts/api-service/compose.yml"
-scp "$project_folder/devops/compose.yml" $user@${server_ip}:/devop/scripts/api-service/compose.yml
+#scp "$project_folder/devops/compose.yml" $user@${server_ip}:/devop/scripts/api-service/compose.yml
+scp "$PWD/compose.yml" $devop_user@${server_ip}:/devop/scripts/api-service/compose.yml
