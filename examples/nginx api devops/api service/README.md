@@ -3,7 +3,7 @@
 ## Setup
 
 _config.js_ read configuration from a secret file stored on local machine.  
-It has the structure of _api-secrets.example.json_.
+It has the same structure of _api-secrets.example.json_.
 
 ## API endpoints
 

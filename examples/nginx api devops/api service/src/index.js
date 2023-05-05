@@ -4,8 +4,10 @@ import Logger from "./logger.js"
 import Repository from "./repository.js"
 
 // read settings from Environment
-const configurationFile = process.env.config_file_path
-const serverPort = process.env.server_port
+// set it using `export learning_docker_api_service_config_file_path=/c/secrets/learning_docker_api_service_config.json`
+// export learning_docker_api_service_server_port=8005
+const configurationFile = process.env.learning_docker_api_service_config_file_path
+const serverPort = process.env.learning_docker_api_service_server_port
 
 console.log("** configurationFile:", configurationFile)
 console.log("** serverPort:", serverPort)
