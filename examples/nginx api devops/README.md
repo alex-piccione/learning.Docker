@@ -17,6 +17,7 @@ TODO:
   - [x] README contains the command(s) to start the service
 - [x] API Service should expose /api/info endpoint that return the version
 - [ ] Bash command to copy secrets/configuration file to host server
+- [ ] Bash command to setup /secrets/api-secrets.json file on host server
 - [x] GitHub action to create images and publish on some Docker image repository
   - [x] "deploy api-service test image.yml"
   - [ ] API service image
@@ -41,12 +42,12 @@ Api server use secrets from local _/secrets/api-secrets.json_ file (check "api s
 Go to local root path.
 ``sh
 cd "api service"
-npm install
+yarn start
 ``
 
 ## How to run the API service locally
 
-Go to local root path.
+Go to local root path (currently _/examples/nginx api devops/_).
 _./start-api.sh_:
 ``sh
 cd "api service"
