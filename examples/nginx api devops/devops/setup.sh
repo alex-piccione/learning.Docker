@@ -16,7 +16,7 @@ server_ip=$mercury
 ## copy "/secrets/conf/api-service.secrets.json" to "/devop/conf/api-service/secrets.json"
 
 # curly brackets are used to escape the variable followed by colon (:)
-scp "/d/Programming/devop/config/learning-docker_api-service.config.json" $devop_user@${server_ip}:/devop/config/api-service/configuration.json
+scp "/d/Programming/devop/learning-docker/config/api-service.config.json" $devop_user@${server_ip}:/devop/config/api-service/configuration.json
 
 # another syntax for Windows
 #scp "d:/Programming/devop/config/learning-docker_api-service.config.json" $user@${server_ip}:/devop/config/api-service/configuration.json

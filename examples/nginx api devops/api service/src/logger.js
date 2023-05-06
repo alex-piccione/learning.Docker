@@ -3,13 +3,21 @@ import path from "path"
 
 const Logger = (logFile) => {
 
+  console.log("check file path already exists")
+
   // If file does not exists,  create it and change permission, otherwise it results read-only.
   if(!fs.existsSync(logFile))
+  {
+    console.log("create log file path: " + path.dirname(logFile))
     fs.mkdirSync(path.dirname(logFile), {recursive: true})
+  }
+  else 
+    console.log("log file path already exists")
+
 
   fs.appendFile(logFile, "", {recursive: true}, (err) => {
     if (err)
-      throw new Error(`Failed to create file "${logFile}". ${err}.`)
+      throw new Error(`Failed to create file log file "${logFile}". ${err}.`)
     console.log("Log file created.")
   });
 

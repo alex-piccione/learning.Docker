@@ -8,11 +8,11 @@ services:
     image: alessandropiccione/test-api-service:latest
     restart: on-failure
     environment:
-      - config_file_path=/devop/config/api-service/configuration.json
+      - config_file_path=/devop/config.json
       - server_port=3010
     ports: 
       - 80:3010
     volumes:
       # /path/on/host:/path/in/container
-      - /devop:/devop
+      - /devop/api-service:/devop
 

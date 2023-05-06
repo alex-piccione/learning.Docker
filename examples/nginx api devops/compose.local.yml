@@ -11,13 +11,13 @@ services:
       context: api service
       dockerfile: Dockerfile
     environment:
-      - config_file_path=/devop/api-service.config.json
+      - config_file_path=/devop/config.json
       - server_port=3001
     ports: 
-      - 3108:3001
+      - 3101:3001
     volumes:
       # /path/on/host:/path/in/container
-      - d:/Programming/devop/learning-docker:/devop
+      - d:/Programming/devop/learning-docker/api-service:/devop
     
 #volumes:
 #  devop:
