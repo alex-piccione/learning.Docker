@@ -7,7 +7,8 @@ RUN npm install --omit=dev --frozen-lockfile
 FROM node:19-alpine AS runner
 WORKDIR /app
 COPY --from=dependencies /app/node_modules ./node_modules
-COPY package.json ./package.json
+#COPY package.json ./package.json
+COPY yarn.lock ./yarn.lock
 COPY src/ ./
 
 #VOLUME /devops/secrets:/secrets

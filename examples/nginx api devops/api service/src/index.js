@@ -9,7 +9,6 @@ import Repository from "./repository.js"
 const configurationFile = process.env.learning_docker_api_service_config_file_path
 const serverPort = process.env.learning_docker_api_service_server_port
 
-
 console.log("** configurationFile:", configurationFile)
 console.log("** serverPort:", serverPort)
 
