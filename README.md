@@ -131,3 +131,19 @@ No, crea epolicy for ECR Actions (all resources) and add it to User Group of the
 
 
 In the end the "AmazonEC2ContainerRegistryPowerUser" policy contains ALL, also the get-login-password permission.
+
+
+## Known issues
+
+Docker desktop fails to start a container:  
+> Error invoking remote method 'docker-start-container': Error: (HTTP code 500) server error - Ports are not available: exposing port TCP 127.0.0.1:50505 -> 0.0.0.0:0: listen tcp 127.0.0.1:50505: bind: An attempt was made to access a socket in a way forbidden by its access permissions.
+  
+This error is related to Windows blocking some ports...  
+
+### Solution
+```powershell
+# as Administrator
+net stop winnat
+docker start container_name
+net start winnat
+```

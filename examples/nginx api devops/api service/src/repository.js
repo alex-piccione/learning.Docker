@@ -39,7 +39,7 @@ const Repository = (connectionString) => {
               resolve(currencies)
             })
         } catch (error) {
-          console.log("error")
+          console.log("error getting currencies")
           reject(`${error}`)
         }
       }),

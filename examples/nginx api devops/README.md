@@ -3,7 +3,9 @@
 This is a full example of deploy a Nginx load balancer for a multi instance web app.  
 
 ![images](diagrams/Infrastructure%20with%20NGINX.drawio.png)
-
+  
+GitHub Actions: https://github.com/alex-piccione/learning.Docker/actions 
+AWS Elastic Container Repository: test-api-service
 
 This is the **local root path**: 
 ``cd /d/Programming/Docker\ and\ Kubernetes/learning.Docker/examples/nginx\ api\ devops/``
@@ -14,19 +16,23 @@ TODO:
 - [x] Able to run the API service locally
   - [x] README contains the command(s) to start the service
 - [x] API Service should expose /api/info endpoint that return the version
-- [ ] Bash command to copy /secrets/api-secrets.json file on host server
+- [ ] Bash command to copy secrets/configuration file to host server
 - [x] GitHub action to create images and publish on some Docker image repository
   - [x] "deploy api-service test image.yml"
   - [ ] API service image
   - [x] Nginx image 
+- [ ] Setup instructions to prepare server
+  - [ ] Documented
+  - [ ] Setup tested
 - [ ] Setup Nginx to run both the containers
 - [ ] ...
 - [ ] GitHub action to deploy containers the first time
   - [ ] test: when removing containers on docker, it will recreate them
 - [ ] GitHub action to update containers on deploy
   - [ ] test: after deploy, the services are updated with new version
-- [ ] GitHub action to run Dockerfile or Docker-compose ?
+- [ ] GitHub action to run Dockerfile or Docker-compose ?  
   - docker-compose because it manages all in one place (network, configs etc...)
+  - [ ] docker-compose file can be run locally
 
 ## How to setup local environment
 
@@ -38,7 +44,7 @@ cd "api service"
 npm install
 ``
 
-## How to run the service locally
+## How to run the API service locally
 
 Go to local root path.
 _./start-api.sh_:
@@ -63,11 +69,16 @@ Install Docker Compose on the server.
 check with: ``docker-compose version``
 
 
-## How to sun all the services
+## How to run all the services
 
 From local root:
 ``docker-compose up``
-``docker-compose -f compose.local.yml up --force-recreate``
+``docker-compose -f compose.local.yml up -d --force-recreate``
+or new syntax
+``docker compose -f compose.local.yml up -d --force-recreate``
+
+check with
+``docker ps``
 
 ## Deploy to production
 
