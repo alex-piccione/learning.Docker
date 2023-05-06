@@ -37,23 +37,25 @@ TODO:
 
 ## How to setup local environment
 
-Api server use secrets from local _/secrets/api-secrets.json_ file (check "api service/config.js").   
+Api server use secrets from a configuration file.  
+The configuration file path and server port is passed through Environment variables, see _api service/config.js_.   
 
 Go to local root path.
 ``sh
 cd "api service"
-yarn start
+yarn install
 ``
 
 ## How to run the API service locally
 
+1. In local NodejS
 Go to local root path (currently _/examples/nginx api devops/_).
-_./start-api.sh_:
-``sh
-cd "api service"
-npm start
-open http://localhost:3000/version
-``
+run: ``./start-api.sh``
+
+2. Docker compose
+```sh
+docker compose -f compose.local.yaml
+```
 
 [api service/README.md](api%20service/README.md) contains instructions to use the service.
 
