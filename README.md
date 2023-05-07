@@ -14,7 +14,7 @@ Pluralsight [Docker fundamentals for developer](https://app.pluralsight.com/path
 - [X] Container run
 - [X] Cleanup image and use small start images
 - [X] Multi-stage Docker build
-- [ ] Docker Compose
+- [x] Docker Compose
 - [X] Docker Swarm (service) - [open](Readme%20Swarm.md)
 - [ ] Docker Stacks
 - [X] Docker Network
@@ -92,7 +92,7 @@ To run a bash console in a container:
 I'm trying to use the free tier.  
 Region: eu-central-1 (Frankfurt)  
 https://console.aws.amazon.com/ecr/home?region=eu-central-1  
-Private address format: https://aws_account_id.dkr.ecr.region.amazonaws.com  
+Private address format: https://{aws_account_id}.dkr.ecr.{region}.amazonaws.com  
 
 How to use ``docker login`` with a IAM user?  
 https://aws.amazon.com/blogs/compute/authenticating-amazon-ecr-repositories-for-docker-cli-with-credential-helper/  
@@ -129,8 +129,43 @@ https://stackoverflow.com/questions/70828205/pushing-an-image-to-ecr-getting-ret
 Add policies to the repository...  
 No, crea epolicy for ECR Actions (all resources) and add it to User Group of the user.  
 
-
 In the end the "AmazonEC2ContainerRegistryPowerUser" policy contains ALL, also the get-login-password permission.
+
+#### Consume images from ECR
+In docker compose file I have:
+``image: image: *********.dkr.ecr.eu-central-1.amazonaws.com/test-api-service:latest``  
+In order to have this command working the use has to be authenticated and have permisison to pull image from ECR.  
+
+To authenticate this is the AWS CLI command ``aws login``.  
+To run this command the AWS CLI must be installed.    
+
+To use a AWS Role instead of principal account, create a profile
+``aws configure set role_arn arn:aws:iam::<account-id>:role/<role-name> --profile <profile-name>``
+``aws configure set role_arn arn:aws:iam::151404309046:role/learning --profile learning``
+
+I create a AWS profile "" in ~/.aws/config
+```
+[profile devop]
+role_arn = arn:aws:iam:000000:role/devop
+source_profile = default
+```
+
+~/.aws/credentials already exists and has the root user as default
+```
+[default]
+aws_access_key_id = ***
+aws_secret_access_key = ***
+```
+
+``aws --profile learning ecr get-login-password --region ${AWS_REGION}``
+
+
+Error for 
+An error occurred (AccessDeniedException) when calling the GetAuthorizationToken operation.  
+And after solved that :
+ecr:BatchGetImage
+the usual AWS IAM nightmare.
+
 
 
 ## Known issues

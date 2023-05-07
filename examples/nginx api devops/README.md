@@ -16,15 +16,14 @@ TODO:
 - [x] Able to run the API service locally
   - [x] README contains the command(s) to start the service
 - [x] API Service should expose /api/info endpoint that return the version
-- [ ] Bash command to copy secrets/configuration file to host server
-- [ ] Bash command to setup /secrets/api-secrets.json file on host server
+- [x] Bash command to copy secrets/configuration file to host server
 - [x] GitHub action to create images and publish on some Docker image repository
   - [x] "deploy api-service test image.yml"
-  - [ ] API service image
+  - [x] API service image
   - [x] Nginx image 
-- [ ] Setup instructions to prepare server
-  - [ ] Documented
-  - [ ] Setup tested
+- [x] Setup instructions to prepare server
+  - [x] Documented
+  - [x] Setup tested
 - [ ] Setup Nginx to run both the containers
 - [ ] ...
 - [ ] GitHub action to deploy containers the first time

@@ -1,5 +1,9 @@
 # Docker Compose
 
+**This is old, the docker-compose command was replaced by docker "compose" command**
+Like ``docker compose up``.
+
+
 ``docker-compose build``
 ``docker-compose up``
 ``docker-compose down``
