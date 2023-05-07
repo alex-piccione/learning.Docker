@@ -86,12 +86,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: run script
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
         run: |
           echo run deploy script
           mkdir -p ~/.ssh
-          echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
+          echo "${{ secrets.SERVER_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           ssh-keyscan -H ${{secrets.SERVER_IP}} > ~/.ssh/known_hosts          
           chmod 600 ~/.ssh/id_rsa          
           ssh -i ~/.ssh/id_rsa ${{secrets.DEVOP_USER}}@${{secrets.SERVER_IP}} /devop/learning-docker/api-service/deploy.sh
