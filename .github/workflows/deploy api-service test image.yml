@@ -92,6 +92,7 @@ jobs:
           echo run deploy script
           mkdir -p ~/.ssh
           echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
+          less ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa          
           ssh -i ~/.ssh/id_rsa ${{secrets.DEVOP_USER}}@${{secrets.SERVER_IP}} /devop/learning-docker/api-service/deploy.sh
           rm ~/.ssh/id_rsa
