@@ -88,7 +88,14 @@ jobs:
       - name: run script
         run: |
           echo run deploy script
-          ssh -i "${{secrets.SERVER_SSH_PRIVATE_KEY}}" ${{secrets.DEVOP_USER}}@${{secrets.SERVER_IP}} /devop/learning-docker/api-service/deploy.sh
+          mkdir -p ~/.ssh
+          echo "${{secrets.SERVER_SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          #ssh -i "${{secrets.SERVER_SSH_PRIVATE_KEY}}" ${{secrets.DEVOP_USER}}@${{secrets.SERVER_IP}} /devop/learning-docker/api-service/deploy.sh
+          ssh -i ~/.ssh/id_rsa ${{secrets.DEVOP_USER}}@${{secrets.SERVER_IP}} /devop/learning-docker/api-service/deploy.sh
+          rm ~/.ssh/id_rsa
+
+
     
 
 
