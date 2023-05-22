@@ -81,7 +81,7 @@ jobs:
           echo ---
   
   deploy_script:
-    name: "Deploy script on server"    
+    name: "Run the deploy script on server"    
     needs: publish_ECR
     runs-on: ubuntu-latest
     steps:

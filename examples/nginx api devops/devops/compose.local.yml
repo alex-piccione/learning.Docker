@@ -1,5 +1,5 @@
 # Docker Compose file to run containers locally
-# launch it with: docker-compose -f compose.local.yml up --force-recreate
+# launch it with: docker compose -f devops/compose.local.yml up --force-recreate
 
 version: "3.9"
 name: test-api-service

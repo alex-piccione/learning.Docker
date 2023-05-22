@@ -16,7 +16,7 @@ TODO:
 - [x] Able to run the API service locally
   - [x] README contains the command(s) to start the service
 - [x] API Service should expose /api/info endpoint that return the version
-- [x] Bash command to copy secrets/configuration file to host server
+- [x] Bash command to copy secrets/configuration/scropts file to host server
 - [x] GitHub action to create images and publish on some Docker image repository
   - [x] "deploy api-service test image.yml"
   - [x] API service image
@@ -36,7 +36,7 @@ TODO:
 
 ## How to setup local environment
 
-Api server use secrets from a configuration file.  
+Api server uses secrets from a configuration file.  
 The configuration file path and server port is passed through Environment variables, see _api service/config.js_.   
 
 Go to local root path.
@@ -86,7 +86,7 @@ check with
 
 ### Setup
 
-Host file structure
+Host file structure (obsolete)
 
 ```
 /devop
@@ -99,6 +99,11 @@ Host file structure
   /scripts
     /api_service
 ```
+
+### NGINX
+
+Certificate?
+
 
 ### GitHub action
 
