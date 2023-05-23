@@ -1,6 +1,8 @@
 # NGINX API example 
 name: Create API-service test Docker image
-on: push
+on: 
+  push:
+    paths: ["examples/nginx api devops/api service/**"]
 
 env:  
   IMAGE: test-api-service

@@ -4,8 +4,6 @@ Personal study of Docker.
 
 [Examples/Nginx api devops](examples/nginx api devops/README.md)  
 
-[![deploy node webapp 1.yml](https://github.com/alex-piccione/learning.docker/actions/workflows/deploy node webapp 1.yml/badge.svg)](https://github.com/alex-piccione/learning.docker/actions/workflows/deploy node webapp 1.yml)
-
 ## Courses
 
 Pluralsight [Docker fundamentals for developer](https://app.pluralsight.com/paths/skill/docker-fundamentals-for-developers): [_____]
