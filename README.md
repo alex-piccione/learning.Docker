@@ -2,8 +2,8 @@
 
 Personal study of Docker.  
 
-[Examples/Nginx api devops](examples/README.md)
-[![Create API-service test Docker image](https://github.com/alex-piccione/learning.Docker/actions/workflows/deploy%20api-service%20test%20image.yml/badge.svg)](https://github.com/alex-piccione/learning.Docker/actions/workflows/deploy%20api-service%20test%20image.yml)
+[Examples/Nginx api devops](examples/nginx api devops/README.md)  
+
 [![deploy node webapp 1.yml](https://github.com/alex-piccione/learning.docker/actions/workflows/deploy node webapp 1.yml/badge.svg)](https://github.com/alex-piccione/learning.docker/actions/workflows/deploy node webapp 1.yml)
 
 ## Courses
