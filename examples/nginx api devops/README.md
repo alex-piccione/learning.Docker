@@ -1,6 +1,7 @@
 # Nginx Webapp Devops
 
 This is a full example of deploy a Nginx load balancer for a multi instance web app.  
+More than that there is everything to deploy the service from GitHub Actions.  
 
 ![images](diagrams/Infrastructure%20with%20NGINX.drawio.png)
   
