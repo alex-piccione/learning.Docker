@@ -1,4 +1,4 @@
-# This file runs the deploy on production server
+# This file runs the deploy on production server (host)
 
 # replace image template with real value
 cd /devop/learning-docker/api-service

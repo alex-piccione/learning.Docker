@@ -6,7 +6,7 @@ Personal study of Docker.
 
 ## Courses
 
-Pluralsight [Docker fundamentals for developer](https://app.pluralsight.com/paths/skill/docker-fundamentals-for-developers): [_____]
+PluralSight [Docker fundamentals for developer](https://app.pluralsight.com/paths/skill/docker-fundamentals-for-developers)
 
 ## Learned & To Learn
 
@@ -15,11 +15,11 @@ Pluralsight [Docker fundamentals for developer](https://app.pluralsight.com/path
 - [X] Cleanup image and use small start images
 - [X] Multi-stage Docker build
 - [x] Docker Compose
-- [X] Docker Swarm (service) - [open](Readme%20Swarm.md)
+- [X] Docker Swarm (service) - [Readme](Readme%20Swarm.md)
 - [ ] Docker Stacks
 - [X] Docker Network
-- [X] Docker Volumes/Bind mounts
-- [ ] Setup Docker on a VPS - [open](Readme%20VPS.md)
+- [X] Docker Volumes/Bind mounts - [Readme](Readme%20Volume.md)
+- [ ] Setup Docker on a VPS - [Readme](Readme%20VPS.md)
 
 ## Build an image
 

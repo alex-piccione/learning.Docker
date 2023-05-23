@@ -1,5 +1,5 @@
 # NGINX API example 
-name: Create API-service test Docker image
+name: Deploy API service Docker image
 on: 
   push:
     paths: ["examples/nginx api devops/api service/**"]
@@ -31,6 +31,8 @@ jobs:
           if-no-files-found: error
 
   publish_dockerhub:
+    # disabled
+    if: false
     name: Publish image on DockerHub
     needs: create_image
     runs-on: ubuntu-latest

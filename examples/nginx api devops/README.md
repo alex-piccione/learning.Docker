@@ -1,19 +1,32 @@
 # Nginx Webapp Devops
 
 This is a full example of deploy a Nginx load balancer for a multi instance web app.  
-More than that there is everything to deploy the service from GitHub Actions.  
-[![Create API-service test Docker image](https://github.com/alex-piccione/learning.Docker/actions/workflows/deploy%20api-service%20test%20image.yml/badge.svg)](https://github.com/alex-piccione/learning.Docker/actions/workflows/deploy%20api-service%20test%20image.yml)
+More than that, there is everything to deploy the service from GitHub Actions.  
+[![Create API-service Docker image](https://github.com/alex-piccione/learning.Docker/actions/workflows/deploy%20api-service%20image.yml/badge.svg)](https://github.com/alex-piccione/learning.Docker/actions/workflows/deploy%20api-service%20image.yml)
 
-![images](diagrams/Infrastructure%20with%20NGINX.drawio.png)
+![images](images/Infrastructure%20with%20NGINX.drawio.png)
   
 GitHub Actions: https://github.com/alex-piccione/learning.Docker/actions 
 AWS Elastic Container Repository: test-api-service
 
-This is the **local root path**: 
+This is the **local root path** used for local tests: 
 ``cd /d/Programming/Docker\ and\ Kubernetes/learning.Docker/examples/nginx\ api\ devops/``
 ``cd "D:\Programming\Docker and Kubernetes\learning.Docker\examples\nginx api devops"``
 
-TODO:
+## How it works
+
+Some setup on AWS, GitHub and the host machine as to be done in advance.  
+An AWS role with ECR permissions is required.
+The AWS role has to be set on the host machine too.  
+An SSH key as to be set on the host machine.  
+  
+The API service is a Nodejs application.  
+There is a GitHub action that create a Docker image and publish it to AWS ECR.  
+It requires the AWS credentials of a role that has thye right permission for AWS ECR.  
+  
+There is a docker compose file in the _devops_ folder that run the 
+
+## TODO
 
 - [x] Able to run the API service locally
   - [x] README contains the command(s) to start the service
@@ -109,3 +122,4 @@ Certificate?
 
 ### GitHub action
 
+_deploy api-service image.yml_
