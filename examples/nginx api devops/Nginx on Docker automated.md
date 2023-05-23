@@ -3,21 +3,6 @@
 Procedure, scripts and commands to execute Continuous Delivery using containers on a single Docker instance.  
 We try to deploy a web app with a Nginx that makes a load balancer for the 2 instances.
 
-On the server we have this structure:
-
-```
-~/devops
-   /secrets
-     /app-web/secrets.json
-     /app-api/secrets.yaml
-     /nginx/config.cfg
-   /scripts
-     run_aaa.sh
-     /app-web/setup.sh
-     /app-api/setup.sh
-     /nginx/configure.sh
-```
-
 ## Initial setup
 
 ### Setup a dedicated user
@@ -46,8 +31,8 @@ Add user to "docker" group: `sudo usermod -aG docker devop`
 
 ### Set Secrets file and scripts for the web app
 
-Create the _/devops_ directory: `sudo mkdir /devops && sudo chown devop /devops && sudo chgrp devops /devops`
-Create the other folders: (not sudo) `mkdir /devops/secrets && mkdir /devops/scripts`
+Create the _/devop_ directory: `sudo mkdir /devop && sudo chown devop /devop && sudo chgrp devops /devop`
+Create the other folders: (not sudo) `mkdir /devop/secrets && mkdir /devop/scripts`
 Check the owner: `ls /devops/ -la`
 
 ```

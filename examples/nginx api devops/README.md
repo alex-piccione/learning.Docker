@@ -29,11 +29,11 @@ There is a docker compose file in the _devops_ folder that run the
 ## TODO
 
 - [x] Able to run the API service locally
-  - [x] README contains the command(s) to start the service
+  - [x] README contains the command(s) to start the service locally
 - [x] API Service should expose /api/info endpoint that return the version
-- [x] Bash command to copy secrets/configuration/scropts file to host server
+- [x] Bash command to copy secrets/configuration/scripts file to host server
 - [x] GitHub action to create images and publish on some Docker image repository
-  - [x] "deploy api-service test image.yml"
+  - [x] "deploy api-service image.yml"
   - [x] API service image
   - [x] Nginx image 
 - [x] Setup instructions to prepare server
@@ -41,13 +41,17 @@ There is a docker compose file in the _devops_ folder that run the
   - [x] Setup tested
 - [ ] Setup Nginx to run both the containers
 - [ ] ...
-- [ ] GitHub action to deploy containers the first time
+- [x] GitHub action to upate and statrt containers
   - [ ] test: when removing containers on docker, it will recreate them
-- [ ] GitHub action to update containers on deploy
+  - [ ] test: when update version, it will show up new version
+- [ ] GitHub action to update deploy version
   - [ ] test: after deploy, the services are updated with new version
-- [ ] GitHub action to run Dockerfile or Docker-compose ?  
-  - docker-compose because it manages all in one place (network, configs etc...)
-  - [ ] docker-compose file can be run locally
+- [x] Docker Compose
+  - [ ] API service
+  - [ ] Nginx
+  - [ ] Local version to be run locally
+  - [ ] SSH
+  - [ ] Domain
 
 ## How to setup local environment
 
@@ -68,7 +72,7 @@ run: ``./start-api.sh``
 
 2. Docker compose
 ```sh
-docker compose -f compose.local.yaml
+docker compose -f devop/compose.local.yml up --force-recreate
 ```
 
 [api service/README.md](api%20service/README.md) contains instructions to use the service.

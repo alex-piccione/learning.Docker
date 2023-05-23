@@ -9,9 +9,6 @@ Nginx instance is a load balancer for a simple web app also running on the same 
 Nginx exposes itself over SSL.  
 The webapp load the secrets from a file on the server.
 
-Use bash shell, not PowerShell, to simulate operations executed from a GitHub Action.  
-Not really a matter because this setup has to be done once to prepare the environment.
-
 ## Steps:
 
 ### 1. Create a Docker network

@@ -1,8 +1,8 @@
 # Docker Compose file to run containers locally
-# launch it with: docker compose -f devops/compose.local.yml up --force-recreate
+# launch it with: docker compose -f devop/compose.local.yml up --force-recreate
 
 version: "3.9"
-name: test-api-service
+name: test-api-service-with-nginx
 services:
   api:
     container_name: API
@@ -18,6 +18,17 @@ services:
     volumes:
       # /path/on/host:/path/in/container
       - d:/Programming/devop/learning-docker/api-service:/devop
+
+  nginx:
+    depends_on: [api]
+    container_name: NGINX
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    environment:
+      - api-service-port=3101
+
+
     
 #volumes:
 #  devop:

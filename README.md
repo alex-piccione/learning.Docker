@@ -134,7 +134,7 @@ In the end the "AmazonEC2ContainerRegistryPowerUser" policy contains ALL, also t
 #### Consume images from ECR
 In docker compose file I have:
 ``image: image: *********.dkr.ecr.eu-central-1.amazonaws.com/test-api-service:latest``  
-In order to have this command working the use has to be authenticated and have permisison to pull image from ECR.  
+In order to have this command working, the user has to be authenticated and have permission to pull image from ECR.  
 
 To authenticate this is the AWS CLI command ``aws login``.  
 To run this command the AWS CLI must be installed.    

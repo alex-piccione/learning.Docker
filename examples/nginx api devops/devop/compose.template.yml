@@ -19,8 +19,9 @@ services:
       - /devop/learning-docker/api-service:/devop
 
   nginx:
-    contailner_name: nginx
+    container_name: nginx
     image: nginx
     restart: on-failure
     #environment:
+    
 
