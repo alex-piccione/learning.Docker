@@ -2,6 +2,7 @@
 
 This is a full example of deploy a Nginx load balancer for a multi instance web app.  
 More than that there is everything to deploy the service from GitHub Actions.  
+[![Create API-service test Docker image](https://github.com/alex-piccione/learning.Docker/actions/workflows/deploy%20api-service%20test%20image.yml/badge.svg)](https://github.com/alex-piccione/learning.Docker/actions/workflows/deploy%20api-service%20test%20image.yml)
 
 ![images](diagrams/Infrastructure%20with%20NGINX.drawio.png)
   
