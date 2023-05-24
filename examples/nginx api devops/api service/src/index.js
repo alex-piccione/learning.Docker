@@ -27,7 +27,6 @@ server.use((req, res, next) => {
   next() // calling next middleware function or handler
 })
 
-// 
 /*const use__ = async (req, res) =>
   await Promise.resolve().catch(err => {
     logger.error(`Unhandled error. ${req}. ${err}.`)
