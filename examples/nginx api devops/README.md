@@ -22,7 +22,8 @@ An SSH key as to be set on the host machine.
   
 The API service is a Nodejs application.  
 There is a GitHub action that create a Docker image and publish it to AWS ECR.  
-It requires the AWS credentials of a role that has thye right permission for AWS ECR.   
+It requires the AWS credentials of a role that has thye right permission for AWS ECR.  
+It requires ECR already having the containers in the registry.  
   
 There is a docker compose file in the _devop_ folder that run the containers.  
 

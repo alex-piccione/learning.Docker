@@ -4,15 +4,19 @@
 cd /devop/learning-docker/api-service
 api_docker_image=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/test-api-service:latest
 nginx_docker_image=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/test-api-service-nginx:latest
-echo "replace docker image with '$docker_image'"
+
 # use double quote to expand env variable correctly
 #sed "s/{docker-image}/$docker_image/g" compose.template.yml > compose.yml
-sed "s|{api-docker-image}|$api_docker_image|g" compose.template.yml > compose.yml
-sed "s|{nginx-docker-image}|$nginx_docker_image|g" compose.yml > compose.yml
+echo "replace docker image with '$api_docker_image'"
+sed "s|{api-docker-image}|$api_docker_image|g" compose.template.yml > compose.temp.yml
 
-echo "run docker compose up (detached)"
+echo "replace docker image with '$nginx_docker_image'"
+sed "s|{nginx-docker-image}|$nginx_docker_image|g" compose.temp.yml > compose.yml
 
-# need to ahve sts:assumeRole permission anf Trust relationship set on Role
+
+echo "Run docker compose up (detached)"
+
+# need to have sts:assumeRole permission and Trust relationship set on Role
 echo login to AWS ECR
 # Get an authentication token for the ECR registry
 DOCKER_PASSWORD=$(aws --profile learning ecr get-login-password --region ${AWS_REGION})
