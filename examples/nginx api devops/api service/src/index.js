@@ -41,7 +41,7 @@ server.listen(serverPort, () => {
 
 server.get("/", (req, res) => {
   const body = `<html>
-        <h1>Hello World <small>(version: ${configuration.version})</small></h1>
+        <h1>Hello World <small>(version: ${configuration.version} build:${version})</small></h1>
 
         <h3>Pages</h3>
         <menu>            
