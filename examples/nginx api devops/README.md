@@ -72,7 +72,7 @@ run: ``./start-api.sh``
 
 2. Docker compose
 ```sh
-docker compose -f devop/compose.local.yml up --force-recreate
+docker compose -f devop/compose.local.yml up --build
 ```
 
 [api service/README.md](api%20service/README.md) contains instructions to use the service.

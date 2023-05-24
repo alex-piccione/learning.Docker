@@ -12,7 +12,7 @@ const Logger = (logFile) => {
     fs.mkdirSync(path.dirname(logFile), {recursive: true})
   }
   else 
-    console.log("log file path already exists")
+    console.log("Log file path already exists, skip creation.")
 
 
   fs.appendFile(logFile, "", {recursive: true}, (err) => {
