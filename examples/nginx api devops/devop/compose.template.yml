@@ -11,7 +11,7 @@ services:
     restart: on-failure
     environment:
       - config_file_path=/devop/config.json
-      - server_port=3010
+      - server_port=3001
     #ports: 
     #  - 81:3010
     volumes:
