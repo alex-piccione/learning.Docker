@@ -2,7 +2,7 @@
 
 This is a full example of deploy a Nginx load balancer for a multi instance web app.  
 More than that, there is everything to deploy the service from GitHub Actions.  
-[![Create API-service Docker image](https://github.com/alex-piccione/learning.Docker/actions/workflows/deploy%20api-service%20image.yml/badge.svg)](https://github.com/alex-piccione/learning.Docker/actions/workflows/deploy%20api-service%20image.yml)
+[![Create API-service Docker image](https://github.com/alex-piccione/learning.Docker/actions/workflows/deploy%20api-devop%20image.yml/badge.svg)](https://github.com/alex-piccione/learning.Docker/actions/workflows/deploy%20api-devop%20image.yml)
 
 ![images](images/Infrastructure%20with%20NGINX.drawio.png)
   
@@ -68,7 +68,7 @@ yarn install
 
 1. In local NodejS
 Go to local root path (currently _/examples/nginx api devops/_).
-run: ``./start-api.sh``
+run: ``./devop/start-api.sh``
 
 2. Docker compose
 ```sh

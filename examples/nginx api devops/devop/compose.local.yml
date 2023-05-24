@@ -29,8 +29,6 @@ services:
       dockerfile: Dockerfile
     ports: 
       - 81:80
-    #volumes:
-    #  - d:/Programming/devop/learning-docker/api-service:/etc/nginx/nginx.conf
     networks: 
       - my-network
 
