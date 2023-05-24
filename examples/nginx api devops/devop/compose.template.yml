@@ -17,6 +17,8 @@ services:
     volumes:
       # /path/on/host:/path/in/container
       - /devop/learning-docker/api-service:/devop
+    networks: 
+      - my-network
    
   nginx:
     depends_on: [api]
@@ -28,3 +30,7 @@ services:
       - 90:80
     networks: 
       - my-network
+      
+networks:
+  my-network:
+    driver: bridge
