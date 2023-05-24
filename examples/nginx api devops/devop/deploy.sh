@@ -28,12 +28,8 @@ DOCKER_PASSWORD=$(aws --profile learning ecr get-login-password --region ${AWS_R
 #docker login -u AWS -p ${DOCKER_PASSWORD} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
 echo ${DOCKER_PASSWORD} | docker login -u AWS ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
 
-
-## I'm getting this error: 
+## Running the command on hte prompt give this error: 
 ## Error: Cannot perform an interactive login from a non TTY device
+## use the "docker login" command without passing the password, copy it from "echo $DOCKER_PASSWORD"
 
-## another way (not tested):
-## aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${aws_account_id}.dkr.ecr.${region}.amazonaws.com
-
-# new docker "compose" command, replacing the docker-compose
 docker compose -f /devop/learning-docker/api-service/compose.yml up --build -d
