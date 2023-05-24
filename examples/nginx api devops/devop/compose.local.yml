@@ -28,7 +28,7 @@ services:
       context: nginx
       dockerfile: Dockerfile
     ports: 
-      - 81:80
+      - 90:80
     networks: 
       - my-network
 

@@ -11,16 +11,6 @@ COPY --from=dependencies /app/node_modules ./node_modules
 COPY package.json ./package.json
 COPY src/ ./
 
-#VOLUME /devops/secrets:/secrets
-# specify the container path to mount and being visible to the host
-# it can be defined in the host using docker run -v or --mount flags
-# using the "volumes" in docker-compose
-#VOLUME /secrets 
-
-#ENV PORT 3005
-#EXPOSE 3005
-#ENV config_file_path /devop/conf/api-service/configuration.json
-
 # passed by docker build command
 ENV version $VERSION  
 

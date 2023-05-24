@@ -15,7 +15,7 @@ read -p "project root folder (parent of "devops" folder): " project_folder
 # or use already set defaults: ($deveop_user & $mercury)
 devop_user=$devop_user
 server_ip=$mercury
-
+project_folder=/d/Programming/Docker\ and\ Kubernetes/learning.Docker/examples/nginx\ api\ devops
 
 ### Copy API service config
 
@@ -46,4 +46,5 @@ ssh $devop_user@${server_ip} chgrp devops /devop/learning-docker/api-service/com
 
 
 ### Copy Nginx config
+# not needed because is in the Docker image
 

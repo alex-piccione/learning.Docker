@@ -7,7 +7,7 @@ services:
     container_name: API
     #image: alessandropiccione/test-api-service:latest
     # user that run this script should have ECR permission
-    image: {docker-image}
+    image: {api-docker-image}
     restart: on-failure
     environment:
       - config_file_path=/devop/config.json
@@ -22,11 +22,9 @@ services:
     depends_on: [api]
     container_name: NGINX
     restart: on-failure
-    #build:
-    #  context: nginx
-    #  dockerfile: Dockerfile
-    image: nginx:latest
+    #image: nginx:latest  
+    image: {nginx-docker-image}
     ports: 
-      - 81:80
+      - 90:80
     networks: 
       - my-network

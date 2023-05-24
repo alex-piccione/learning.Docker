@@ -1,0 +1,104 @@
+# NGINX API example 
+name: Deploy NGINX Docker image
+on: 
+  push:
+    paths: ["examples/nginx api devops/nginx/**"]
+
+env:  
+  IMAGE: test-api-service-nginx
+  #VERSION: 2.2.${{github.run_number}}
+  SRC_PATH: examples/nginx api devops
+
+jobs:
+  create_image:
+    name: Create Docker image for NGINX
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3    
+      - name: Build Docker image
+        run: |
+          cd "$SRC_PATH/nginx"
+          docker image build -t $IMAGE --build-arg VERSION=$VERSION .
+          echo save image.tar
+          docker save $IMAGE > ../../../image.tar
+      - name: Create artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: docker-artifact
+          path: image.tar
+          if-no-files-found: error
+
+  publish_dockerhub:
+    # disabled
+    if: false
+    name: Publish image on DockerHub
+    needs: create_image
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Get immage artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-artifact
+      - name: Load Docker image
+        run: docker image load -i image.tar
+      - name: Publish on DockerHub
+        env:
+          REPO: ${{secrets.DOCKERHUB_USERID}}
+        run: |
+          echo "### DockerHub login and Push image \"$IMAGE:$VERSION\" "
+          #echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} $DOCKERHUB_URL --password-stdin   
+          echo ${{secrets.DOCKERHUB_PWD}} | docker login -u ${{secrets.DOCKERHUB_USERID}} --password-stdin           
+          docker image tag $IMAGE $REPO/$IMAGE:$VERSION
+          docker image tag $IMAGE $REPO/$IMAGE:latest
+          docker image push $REPO/$IMAGE:$VERSION 
+          docker image push $REPO/$IMAGE:latest
+          echo ---      
+        
+  publish_ECR:
+    name: Publish image on AWS ECR
+    needs: create_image
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Get immage artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-artifact
+      - name: Load Docker image
+        run: docker image load -i image.tar
+      - name: Publish on AWS ECR
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_DEVOP_ACCESS_KEY}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_DEVOP_ACCESS_SECRET}}
+          AWS_REGION: eu-central-1
+          REPO: ${{secrets.AWS_ECR_URL}}
+        run: |
+          echo "### Push image on AWS ECR"
+          # login using environment variables: 
+          password=$(aws ecr get-login-password)
+          echo $password | docker login -u AWS $REPO --password-stdin
+          docker tag $IMAGE $REPO/$IMAGE:$VERSION
+          docker tag $IMAGE $REPO/$IMAGE:latest
+          docker push $REPO/$IMAGE:$VERSION          
+          docker push $REPO/$IMAGE:latest 
+          echo ---
+  
+  deploy_script:
+    name: "Run the deploy script on server"    
+    needs: publish_ECR
+    runs-on: ubuntu-latest
+    steps:
+      - name: run script
+        run: |
+          echo run deploy script
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SERVER_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{secrets.SERVER_IP}} > ~/.ssh/known_hosts          
+          chmod 600 ~/.ssh/id_rsa          
+          ssh -i ~/.ssh/id_rsa ${{secrets.DEVOP_USER}}@${{secrets.SERVER_IP}} /devop/learning-docker/api-service/deploy.sh
+          rm ~/.ssh/id_rsa
+
+
+    
+
+
