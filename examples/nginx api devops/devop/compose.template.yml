@@ -20,7 +20,7 @@ services:
     networks: 
       - my-network
    
-  nginx:
+  nginx:    
     depends_on: [api]
     container_name: NGINX
     restart: on-failure
@@ -30,7 +30,7 @@ services:
       - 90:80
     networks: 
       - my-network
-      
+
 networks:
   my-network:
     driver: bridge

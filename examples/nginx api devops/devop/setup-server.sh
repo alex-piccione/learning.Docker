@@ -42,7 +42,7 @@ ssh $devop_user@${server_ip} chgrp devops /devop/learning-docker/api-service/com
 
 
 # test to launch the deploy script
-#ssh $devop_user@${server_ip} /devop/learning-docker/api-service/deploy.sh
+# ssh $devop_user@${server_ip} /devop/learning-docker/api-service/deploy.sh
 
 
 ### Copy Nginx config
