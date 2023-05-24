@@ -21,4 +21,7 @@ COPY src/ ./
 #EXPOSE 3005
 #ENV config_file_path /devop/conf/api-service/configuration.json
 
+# passed by docker build command
+ENV version $VERSION  
+
 CMD ["node", "./index.js"]

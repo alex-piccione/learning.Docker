@@ -4,6 +4,8 @@ Personal study of Docker.
 
 [Examples/Nginx api devops](examples/nginx%20api%20devops/README.md)  
 
+Docker docs: https://docs.docker.com/engine/reference/commandline/cli/
+
 ## Courses
 
 PluralSight [Docker fundamentals for developer](https://app.pluralsight.com/paths/skill/docker-fundamentals-for-developers)
@@ -32,11 +34,16 @@ docker image build -t {user_id/repository}:{image} {Dockerfile path}
 
 ```bash
 # from webapp folder
-docker image build -t alessandropiccione/test-webapp:3.1 .
-docker image build -t alessandropiccione/test-webapp:latest .
+docker image build -t imgaes-repo/test-webapp:3.1 .
+docker image build -t imgaes-repo/test-webapp:latest .
 
 # from root folder
-docker image build -t alessandropiccione/test-webapp:3.1 ./webapp
+docker image build -t imgaes-repo/test-webapp:3.1 ./webapp
+```
+
+To pass an environment variable:
+```bash
+docker image build -t imgaes-repo/test-webapp:3.1 .
 ```
 
 ## Publish an image

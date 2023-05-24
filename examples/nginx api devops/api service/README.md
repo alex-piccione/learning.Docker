@@ -2,13 +2,13 @@
 
 ## Setup
 
-_config.js_ read configuration from a secret file stored on local machine.  
+_config.js_ read configuration from a secret file stored on the local machine.  
 It has the same structure of _config.example.json_.
 Refer to main README to know how to set it up.  
 
 ## API endpoints
 
-Simple Node app that respond to:
+Simple Node app that responds to:
 
 - GET /         (HTML)
 - GET /api/info (JSON)

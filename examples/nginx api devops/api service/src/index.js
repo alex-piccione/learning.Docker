@@ -8,9 +8,11 @@ import Repository from "./repository.js"
 // export learning_docker_api_service_server_port=8005
 const configurationFile = process.env.config_file_path
 const serverPort = process.env.server_port
+const version = process.env.version
 
 console.log("** configurationFile:", configurationFile)
 console.log("** serverPort:", serverPort)
+console.log("** version:", version)
 
 const configuration = readConfiguration(configurationFile)
 
