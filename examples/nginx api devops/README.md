@@ -22,9 +22,10 @@ An SSH key as to be set on the host machine.
   
 The API service is a Nodejs application.  
 There is a GitHub action that create a Docker image and publish it to AWS ECR.  
-It requires the AWS credentials of a role that has thye right permission for AWS ECR.  
+It requires the AWS credentials of a role that has thye right permission for AWS ECR.   
   
-There is a docker compose file in the _devops_ folder that run the 
+There is a docker compose file in the _devop_ folder that run the containers.  
+
 
 ## TODO
 
@@ -33,7 +34,8 @@ There is a docker compose file in the _devops_ folder that run the
 - [x] API Service should expose /api/info endpoint that return the version
 - [x] Bash command to copy secrets/configuration/scripts file to host server
 - [x] GitHub action to create images and publish on some Docker image repository
-  - [x] "deploy api-service image.yml"
+  - [x] "deploy api-service.yml"
+  - [x] "deploy api-service-nginx.yml"
   - [x] API service image
   - [x] Nginx image 
 - [x] Setup instructions to prepare server
@@ -41,15 +43,15 @@ There is a docker compose file in the _devops_ folder that run the
   - [x] Setup tested
 - [ ] Setup Nginx to run both the containers
 - [ ] ...
-- [x] GitHub action to upate and statrt containers
+- [x] GitHub action to upate and start containers
   - [ ] test: when removing containers on docker, it will recreate them
   - [ ] test: when update version, it will show up new version
 - [ ] GitHub action to update deploy version
   - [ ] test: after deploy, the services are updated with new version
 - [x] Docker Compose
-  - [ ] API service
+  - [x] API service
   - [ ] Nginx
-  - [ ] Local version to be run locally
+  - [x] Local version to be run locally
   - [ ] SSH
   - [ ] Domain
 
