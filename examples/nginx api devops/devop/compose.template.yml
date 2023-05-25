@@ -1,19 +1,19 @@
 # Docker Compose file for prod
+# user that run this script should have ECR permission
 
 version: "3.9"
 name: test-api-service
 services:
   api:
-    container_name: API
-    #image: alessandropiccione/test-api-service:latest
-    # user that run this script should have ECR permission
+    hostname: test-api
+    container_name: API    
     image: {api-docker-image}
     restart: on-failure
     environment:
       - config_file_path=/devop/config.json
       - server_port=3001
     #ports: 
-    #  - 81:3010
+    #  - 81:3010  # for test
     volumes:
       # /path/on/host:/path/in/container
       - /devop/learning-docker/api-service:/devop
