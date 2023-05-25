@@ -96,10 +96,7 @@ check with: ``docker-compose version``
 ## How to run all the services
 
 From local root:
-``docker-compose up``
-``docker-compose -f compose.local.yml up -d --force-recreate``
-or new syntax
-``docker compose -f compose.local.yml up -d --force-recreate``
+``docker compose -f compose.local.yml up -d --build``
 
 check with
 ``docker ps``

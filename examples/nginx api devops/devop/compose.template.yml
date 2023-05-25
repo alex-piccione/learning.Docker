@@ -24,7 +24,6 @@ services:
     depends_on: [api]
     container_name: NGINX
     restart: on-failure
-    #image: nginx:latest  
     image: {nginx-docker-image}
     ports: 
       - 90:80
