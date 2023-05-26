@@ -27,7 +27,6 @@ const Logger = (logFile) => {
   });
 
   const writeLog = (message, level) => {
-
     //if (!fs.accessSync(logFile, fs.constants.W_OK))
     //  console.log("cannot write the log file")  // false result
 
