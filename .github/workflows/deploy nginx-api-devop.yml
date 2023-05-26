@@ -6,7 +6,7 @@ on:
 
 env:  
   IMAGE: test-api-service
-  VERSION: 2.2.${{github.run_number}}
+  VERSION: 2.3.${{github.run_number}}
   SRC_PATH: examples/nginx api devops
 
 jobs:

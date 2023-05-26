@@ -68,8 +68,6 @@ server.get("/api/info", (req, res) => {
     status: "OK"
   }
 
-  // suggested: ['Kaz Hawkins', 'Michael Kiwanuka']" + "}"
-
   if (req.accepts("text/json"))
     res.json(data)    
   else
