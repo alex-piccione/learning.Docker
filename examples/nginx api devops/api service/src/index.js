@@ -75,7 +75,6 @@ server.get("/api/info", (req, res) => {
 })
 
 
-
 server.get("/currencies", (req, res, next) => {
 
   const formatData = (currencies) => `<html>    

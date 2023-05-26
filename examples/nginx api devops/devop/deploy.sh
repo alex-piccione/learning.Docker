@@ -32,4 +32,7 @@ echo ${DOCKER_PASSWORD} | docker login -u AWS --password-stdin ${AWS_ACCOUNT_ID}
 ## Error: Cannot perform an interactive login from a non TTY device
 ## use the "docker login" command without passing the password, copy it from "echo $DOCKER_PASSWORD"
 
+docker compose -f /devop/learning-docker/api-service/compose.yml pull
 docker compose -f /devop/learning-docker/api-service/compose.yml up --build -d
+# cleanup dangling images
+docker system prune -af 

@@ -13,6 +13,5 @@ COPY src/ ./
 
 # passed by docker build command
 ENV version $VERSION  
-ENV version 123
 
 CMD ["node", "./index.js"]
