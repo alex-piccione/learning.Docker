@@ -12,7 +12,7 @@ const version = process.env.version
 
 console.log("** configurationFile:", configurationFile)
 console.log("** serverPort:", serverPort)
-console.log("** version:", version)
+console.log("** version-test:", version)
 
 const configuration = readConfiguration(configurationFile)
 

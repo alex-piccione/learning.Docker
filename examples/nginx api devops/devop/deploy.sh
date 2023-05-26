@@ -26,7 +26,7 @@ DOCKER_PASSWORD=$(aws --profile learning ecr get-login-password --region ${AWS_R
 
 # Use the authentication token to log in to the ECR registry
 #docker login -u AWS -p ${DOCKER_PASSWORD} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
-echo ${DOCKER_PASSWORD} | docker login -u AWS ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+echo ${DOCKER_PASSWORD} | docker login -u AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
 
 ## Running the command on hte prompt give this error: 
 ## Error: Cannot perform an interactive login from a non TTY device
