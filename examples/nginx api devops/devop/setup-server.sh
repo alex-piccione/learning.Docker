@@ -57,3 +57,27 @@ ssh $devop_user@${server_ip} mkdir /devop/learning-docker/nginx/wwwroot/.well-kn
 ```
 
 # run the command to create the cert the first time
+# It requires teh port 80 to work
+```bash
+certbot certonly --webroot -d test.monei.it --webroot-path /devop/learning-docker/nginx/wwwroot
+
+certbot certonly --webroot -d test.monei.it \
+--webroot-path /devop/learning-docker/nginx/wwwroot \
+--config-dir /devop/learning-docker/nginx/cert/config \
+--work-dir /devop/learning-docker/nginx/cert/work \
+--logs-dir /devop/learning-docker/nginx/cert/logs \
+-m alessandro.piccione.75@gmail.com
+
+sudo mv /etc/letsencrypt/live/test.monei.it /etc/letsencrypt/live/test.monei.it__by_root
+```
+# it creates cert.pem  chain.pem  fullchain.pem  privkey.pem  README in /etc/letsencrypt/live/test.monei.it
+# but THEM ARE NOT ACCESSIBLE FOR DEVOP USER !!! because I used "sudo"
+# I changed the group of cert.pem and privkey.pem to "devops"
+
+
+```bash
+ssh $devop_user@${server_ip} mkdir /etc/letsencrypt/live/test.monei.it/* mkdir /devop/learning-docker/nginx/cert
+ssh $devop_user@${server_ip} mv /etc/letsencrypt/live/test.monei.it/* /devop/learning-docker/nginx/cert
+```
+
+
