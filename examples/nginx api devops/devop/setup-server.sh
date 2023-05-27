@@ -46,3 +46,6 @@ ssh $devop_user@${server_ip} chgrp devops /devop/learning-docker/api-service/com
 ### Copy Nginx config
 # not needed because is in the Docker image
 
+```bash
+ssh $devop_user@${server_ip} mkdir /devop/learning-docker/nginx/wwwroot
+ssh $devop_user@${server_ip} mkdir /devop/learning-docker/nginx/wwwroot/.well-known/acme-challenge -p
