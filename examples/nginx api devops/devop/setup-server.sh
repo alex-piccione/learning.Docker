@@ -38,8 +38,6 @@ ssh $devop_user@${server_ip} chmod g+wx /devop/learning-docker/api-service/deplo
 scp "$project_folder/devop/compose.template.yml" $devop_user@${server_ip}:/devop/learning-docker/api-service/compose.template.yml
 ssh $devop_user@${server_ip} chgrp devops /devop/learning-docker/api-service/compose.template.yml
 
-## give devop user permission for pull ECR image
-
 
 # test to launch the deploy script
 # ssh $devop_user@${server_ip} /devop/learning-docker/api-service/deploy.sh
