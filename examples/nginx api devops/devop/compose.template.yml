@@ -6,7 +6,7 @@ name: test-api-service
 services:
   api:
     hostname: test-api
-    container_name: API    
+    container_name: learning-test-api    
     image: {api-docker-image}
     restart: on-failure
     environment:
@@ -22,7 +22,7 @@ services:
    
   nginx:    
     depends_on: [api]
-    container_name: NGINX
+    container_name: learning-test-nginx
     restart: on-failure
     image: {nginx-docker-image}
     ports: 

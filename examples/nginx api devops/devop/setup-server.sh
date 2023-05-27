@@ -46,6 +46,14 @@ ssh $devop_user@${server_ip} chgrp devops /devop/learning-docker/api-service/com
 ### Copy Nginx config
 # not needed because is in the Docker image
 
+
+### Setup the HTTertificate with Certbot
+
+
+# create the directory where Certbot set the challenge
 ```bash
 ssh $devop_user@${server_ip} mkdir /devop/learning-docker/nginx/wwwroot
 ssh $devop_user@${server_ip} mkdir /devop/learning-docker/nginx/wwwroot/.well-known/acme-challenge -p
+```
+
+# run the command to create the cert the first time
