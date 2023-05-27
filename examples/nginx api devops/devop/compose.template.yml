@@ -30,7 +30,7 @@ services:
     volumes:
       - /devop/learning-docker/nginx/wwwroot:/wwwroot
       #- /etc/letsencrypt/live/test.monei.it:/cert
-      - /devop/learning-docker/nginx/cert/config/live/test.monei.it:/cert
+      - /devop/learning-docker/nginx/cert/config/live/test.monei.it:/cert        
     networks: 
       - my-network
 
