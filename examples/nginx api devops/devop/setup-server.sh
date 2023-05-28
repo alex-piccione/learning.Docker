@@ -4,15 +4,7 @@
 #sed -i "s/$secretsFile:*^/secretsFile:\/secrets\/api-service.secrets.json,\n/" "api service/src/config.js"
 #sed -i 's/aaa/bbb/' "api service/src/config.js"
 
-## Set some constants: server IP and devop user
-
-# requires SSH connection opened
-read -p "devop user:" devop_user
-read -p "server ip: " server_ip
-read -p "project root folder (parent of "devops" folder): " project_folder
-# /d/Programming/Docker\ and\ Kubernetes/learning.Docker/examples/nginx\ api\ devops
-
-# or use already set defaults: ($deveop_user & $mercury)
+# SSH connection
 devop_user=$devop_user
 server_ip=$mercury
 project_folder=/d/Programming/Docker\ and\ Kubernetes/learning.Docker/examples/nginx\ api\ devops
