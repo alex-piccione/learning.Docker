@@ -43,12 +43,18 @@ ssh $devop_user@${server_ip} chgrp devops /devop/learning-docker/api-service/com
 # ssh $devop_user@${server_ip} /devop/learning-docker/api-service/deploy.sh
 
 
+# test /cert folder is accessible inside nginx container
+docker exec -it learning-test-nginx /bin/bash
+ls /cert
+
 ### Copy Nginx config
-# not needed because is in the Docker image
+# irong, like SSL not set it cannot start and is impossible to investigate
+```bash
+scp "$project_folder/devop/nginx.conf" $devop_user@${server_ip}:/devop/learning-docker/nginx/nginx.conf
+ssh $devop_user@${server_ip} docker restart learning-test-nginx
+```
 
-
-### Setup the HTTertificate with Certbot
-
+### Setup the Certificate with Certbot
 
 # create the directory where Certbot set the challenge
 ```bash
@@ -61,20 +67,33 @@ ssh $devop_user@${server_ip} mkdir /devop/learning-docker/nginx/wwwroot/.well-kn
 ```bash
 certbot certonly --webroot -d test.monei.it --webroot-path /devop/learning-docker/nginx/wwwroot
 
+certbot_email=<your eamil>
+
+cert=/devop/learning-docker/nginx/cert
 certbot certonly --webroot -d test.monei.it \
     --webroot-path /devop/learning-docker/nginx/wwwroot \
-    --config-dir /devop/learning-docker/nginx/cert/config \
-    --work-dir /devop/learning-docker/nginx/cert/work \
-    --logs-dir /devop/learning-docker/nginx/cert/logs \
-    -m alessandro.piccione.75@gmail.com
+    --config-dir $cert/config \
+    --work-dir $cert/work \
+    --logs-dir $cert/logs \
+    -m $certbot_email
 
-sudo mv /etc/letsencrypt/live/test.monei.it /etc/letsencrypt/live/test.monei.it__by_root
+# cleanup symbolik link, nginx cannot read them
+# ... maybe no more required after moving disable_symlinks off; in the right place
+#cd $cert/live/test.monei.it/config
+#mv cert.pem cert.pem__
+#cp cert.pem__ cert.pem
+#mv privkey.pem privkey.pem__
+#cp privkey.pem__ privkey.pem
 ```
 # it creates cert.pem  chain.pem  fullchain.pem  privkey.pem  README in /etc/letsencrypt/live/test.monei.it
 # Using "sudo" THEM ARE NOT ACCESSIBLE FOR DEVOP USER !!!
 
-#> Certificate is saved at: /devop/learning-docker/nginx/cert/config/live/test.monei.it/fullchain.pem
+#> Certificate is saved at: /devop/learning-docker/nginx/cert/config/live/test.monei.it/cert.pem
 #> Key is saved at:         /devop/learning-docker/nginx/cert/config/live/test.monei.it/privkey.pem
+
+# FILES ARE CREATED AS SYMBOLIK LINK, nginx cannot read them neither with disable_symlinks off; directive !!!
+
+docker exec -it learning-text-nginx ls /devop/learning-docker/nginx/cert/config/live/test.monei.it
 
 
 ```bash

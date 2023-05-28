@@ -24,13 +24,15 @@ services:
     depends_on: [api]
     container_name: learning-test-nginx
     restart: on-failure
-    image: {nginx-docker-image}
+    #image: {nginx-docker-image}
+    image: nginx:1.25.0
     ports: 
       - 90:80
     volumes:
+      - /devop/learning-docker/nginx:/etc/nginx
       - /devop/learning-docker/nginx/wwwroot:/wwwroot
       #- /etc/letsencrypt/live/test.monei.it:/cert
-      - /devop/learning-docker/nginx/cert/config/live/test.monei.it:/cert        
+      #- /devop/learning-docker/nginx/cert/config/live/test.monei.it:/cert        
     networks: 
       - my-network
 
