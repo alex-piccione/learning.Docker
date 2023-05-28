@@ -8,14 +8,13 @@ RUN yarn install --omit=dev --frozen-lockfile
 FROM node:19-alpine AS runner
 WORKDIR /app
 
-# passed by docker build command
-ENV version $VERSION
+
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY package.json ./package.json
 COPY src/ ./
 
-# passed by docker build command
-#ENV version $VERSION   does not work
-#ARG VERSION
+# passed by docker build command (why ARG is required ???)
+ARG VERSION
+ENV version $VERSION
 
 CMD ["node", "./index.js"]
