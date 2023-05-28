@@ -12,6 +12,7 @@ COPY package.json ./package.json
 COPY src/ ./
 
 # passed by docker build command
-ENV version $VERSION  
+#ENV version $VERSION   does not work
+ARG VERSION
 
 CMD ["node", "./index.js"]
