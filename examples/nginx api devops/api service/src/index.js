@@ -101,7 +101,7 @@ server.get("/currencies_test", (req, res, next) => {
 
   const page = formatData(data)
   res.send(page)
-}
+})
 
 server.get("/currencies", (req, res, next) => {
 
