@@ -19,7 +19,7 @@ jobs:
       - name: Build Docker image
         run: |
           cd "$SRC_PATH/api service"
-          docker image build -t $IMAGE --build-arg VERSION=$VERSION .
+          docker image build -t $IMAGE --build-arg VERSION=123$VERSION .
           echo save image.tar
           docker save $IMAGE > ../../../image.tar
       - name: Create artifact
