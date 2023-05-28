@@ -74,6 +74,34 @@ server.get("/api/info", (req, res) => {
     res._write(JSON.stringify(data))
 })
 
+server.get("/currencies_test", (req, res, next) => {
+  const formatData = (currencies) => `<html>    
+  <h1>Currencies</h1>
+  <div><a href="/">Home</a></div>
+  <hr>
+  <table>                     
+      <tr>            
+          <th>Code</th>
+          <th>Name</th>
+      </tr>
+      ${currencies
+        .map(
+          (currency) => `<tr>
+          <td>${currency.Code}</td>
+          <td>${currency.Name}</td>
+      </tr>`
+        )
+        .join("")}   
+  </table>
+</html>`
+
+  const data = [ 
+    {Code:"aaa", Name:"AAA"},
+  ]
+
+  const page = formatData(data)
+  res.send(page)
+}
 
 server.get("/currencies", (req, res, next) => {
 
