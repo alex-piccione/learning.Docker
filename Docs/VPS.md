@@ -1,5 +1,5 @@
 # Docker on a VPS
-<small>← [Readme](Readme.md)</small>
+<small>← [Readme](../Readme.md)</small>
 
 Manage Docker on a remote server.  
 Connect with SSH and execute commands from there.  
@@ -9,7 +9,8 @@ server=<IP>
 username=root
 ```
 
-Conenct with SSH: ``ssh username@server`` or ``ssh $username@$server``
+Conenct with SSH: ``ssh <username>@<server>`` or ``ssh $username@$server``
+
 
 ## Steps to add Docker
 1. Update the apt package index: ``sudo apt update``
@@ -29,6 +30,18 @@ To check the Docker daemon is running:
 ``systemctl status docker`` or ``docker info``
 
 ### Check if API are exposed
-You can check if the Docker daemon is publicly exposing the API by checking the configuration file located at /etc/docker/daemon.json.  
+You can check if the Docker daemon is publicly exposing the API by checking the configuration file located at _/etc/docker/daemon.json_.  
 This file contains the configuration options for the Docker daemon, including the IP address and port on which it is listening.
 
+Web API open?  
+``sudo systemctl edit docker.service`` 
+
+
+## Clean up
+
+``docker image prune -f`` will remove dangling image (`<none>:<none>`)  
+``docker image prune -a`` will remove all unused images  
+  
+``docker volume list`` shows the volumes  
+Use ``docker volume ls --filter dangling=true`` to find dangling volumes,  
+and remove them with ``docker volume prune``

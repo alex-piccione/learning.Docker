@@ -55,7 +55,7 @@ ssh $devop_user@${server_ip} mkdir /devop/learning-docker/nginx/wwwroot/.well-kn
 ```
 
 # run the command to create the cert the first time
-# It requires teh port 80 to work
+# It requires port 80 to work
 ```bash
 certbot certonly --webroot -d test.monei.it --webroot-path /devop/learning-docker/nginx/wwwroot
 

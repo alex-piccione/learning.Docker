@@ -17,11 +17,11 @@ PluralSight [Docker fundamentals for developer](https://app.pluralsight.com/path
 - [X] Cleanup image and use small start images
 - [X] Multi-stage Docker build
 - [x] Docker Compose
-- [X] Docker Swarm (service) - [Readme](Readme%20Swarm.md)
+- [X] Docker Swarm (service) - [Readme](Docs/Swarm.md)
 - [ ] Docker Stacks
 - [X] Docker Network
-- [X] Docker Volumes/Bind mounts - [Readme](Readme%20Volume.md)
-- [ ] Setup Docker on a VPS - [Readme](Readme%20VPS.md)
+- [X] Docker Volumes/Bind mounts - [Readme](Docs/Volume.md)
+- [ ] Setup Docker on a VPS - [Readme](Docs/VPS.md)
 
 ## Build an image
 
@@ -110,7 +110,11 @@ As usual... a nightmare!
 ``docker login`` cannot be used straightforward, I also tried to give to the IAM user Console access.  
 you need to obtain a "temporary password" from the AWS user credentials.  
 Official documentation suggests to use ``aws ecr get-login-password`` command.
-Fortunately ``aws ecr`` is a valid command in _ubuntu-latest_ image. 
+``aws ecr`` is not a valid command, needs to install "AWS CLI":  
+```bash
+apt-get update
+apt-get install awscli
+```
 If the command returns the error: 
 > is not authorized to perform: ecr:GetAuthorizationToken on resource:* ...
 you need to provide some permissions. 
@@ -134,9 +138,24 @@ docker push on GitHub Actions hanging and fails with EOF:
 https://stackoverflow.com/questions/70828205/pushing-an-image-to-ecr-getting-retrying-in-seconds  
 
 Add policies to the repository...  
-No, crea epolicy for ECR Actions (all resources) and add it to User Group of the user.  
+No, crea policy for ECR Actions (all resources) and add it to User Group of the user.  
 
 In the end the "AmazonEC2ContainerRegistryPowerUser" policy contains ALL, also the get-login-password permission.
+
+To solve an issue with specific AWS user:
+```bash
+docker run -it --name test-ecr ubuntu:latest
+$> export AWS_REGION="eu-central-1"
+$> export AWS_ACCESS_KEY_ID=*****
+$> export AWS_SECRET_ACCESS_KEY=*****
+```  
+
+then:  
+```bash
+password=$(aws ecr get-login-password)
+echo $password
+
+```
 
 #### Consume images from ECR
 In docker compose file I have:
