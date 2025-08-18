@@ -1,5 +1,5 @@
 # Docker Compose
-<small>← [Readme](../Readme.md)</small>
+<small>[← README](/README.md)</small>
 
 **This is old, the docker-compose command was replaced by docker "compose" command**
 Like ``docker compose up``.

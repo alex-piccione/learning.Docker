@@ -1,5 +1,5 @@
 # Docker on a VPS
-<small>← [Readme](../Readme.md)</small>
+<small>[← README](/README.md)</small>
 
 Manage Docker on a remote server.  
 Connect with SSH and execute commands from there.  

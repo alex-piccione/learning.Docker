@@ -1,5 +1,5 @@
 # Docker Swarm
-<small>← [Readme](../Readme.md)</small>
+<small>[← README](/README.md)</small>
 
 The Pluralsigh course of Nigel Poulton just jump from a description to a screen that seems to manage Docker swarm without any explanation.  
 He says you can use local Docker app as fine as Docker Play.  

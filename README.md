@@ -16,12 +16,12 @@ PluralSight [Docker fundamentals for developer](https://app.pluralsight.com/path
 - [X] Container run
 - [X] Cleanup image and use small start images
 - [X] Multi-stage Docker build
-- [x] Docker Compose
+- [x] Docker Compose - [Readme](Docs/docker-compose.md)
 - [X] Docker Swarm (service) - [Readme](Docs/Swarm.md)
 - [ ] Docker Stacks
-- [X] Docker Network
+- [X] Docker Network - [Readme](Docs/Network.md)
 - [X] Docker Volumes/Bind mounts - [Readme](Docs/Volume.md)
-- [ ] Setup Docker on a VPS - [Readme](Docs/VPS.md)
+- [X] Setup Docker on a VPS - [Readme](Docs/VPS.md)
 
 ## Build an image
 

@@ -1,5 +1,5 @@
 # Network
-<small>← [Readme](../Readme.md)</small>
+<small>[← README](/README.md)</small>
 
 ``docker network create --driver bridge network_1``
 ``docker network ls``
