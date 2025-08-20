@@ -16,7 +16,7 @@ PluralSight [Docker fundamentals for developer](https://app.pluralsight.com/path
 - [X] Container run
 - [X] Cleanup image and use small start images
 - [X] Multi-stage Docker build
-- [x] Docker Compose - [Readme](Docs/docker-compose.md)
+- [x] Docker Compose - [Readme](Docs/Compose.md)
 - [X] Docker Swarm (service) - [Readme](Docs/Swarm.md)
 - [ ] Docker Stacks
 - [X] Docker Network - [Readme](Docs/Network.md)
