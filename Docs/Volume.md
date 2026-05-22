@@ -21,16 +21,16 @@ With Docker, the most common types of storage that is mounted into containers ar
 Example:  
 ```docker
 docker run -p 8500:8500 \
-    --mount type=bind,source=$(pwd)/models/mnist,target=/models/mnist \
+    --mount type=bind,src=$(pwd)/models/mnist,dst=/models/mnist \
     -e MODEL_NAME=mnist \
     -t tensorflow/serving
 ```
 
 So with `--mount` you can setup relevant options for those storage types in a very convenient way: <br>
-The `type` field can be one of the 3 types mentioned above. <br>
-The `source` is the mount point location in the *host file system*
+The `type` field can be one of the 3 types: bind, volume, tmpfs. <br>
+The `source`/`src` is the mount point location in the *host file system*
 (For named volumes, this is the name of the volume, for anonymous volumes, this field is omitted).<br>
-The `target` is the mount point location *inside the container*.
+The `target`/`destination`/`dst` is the mount point location *inside the container*.
 
 ----------------
 
@@ -41,13 +41,7 @@ Please notice that you'll see many examples using the `-v` or `--volume` flags i
 [1]: https://docs.docker.com/storage/#choose-the-right-type-of-mount
 
 
-## Docker run options
+## Attach a volume on an existing container
 
-
-
-## Example of MongoDB container that store data on the host
-
-``docker run --name test-mongo mongo:latest``
-
-## Docker-compose
+It is not possible.
 
